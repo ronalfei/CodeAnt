@@ -3,4 +3,6 @@
 	
 	$codeant->tpl->display("frame/top.htm");
 
+	print 1;
+
 ?>
