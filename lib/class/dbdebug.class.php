@@ -19,7 +19,12 @@ class dbdebug
 				$filename = _SQL_PATH.'sql.'.date('Ymd').'.log';
 				$time = date('H:i:s');
 				$data = "[{$time}] ".trim($sql)."; \r\n";
-				file_put_contents($filename,$data,FILE_APPEND);
+				//判断是否可写
+				if( file_exists($filename) && !is_writable($filename) ){//文件存在且不可写
+					file_put_contents($filename.'.tmp',$data,FILE_APPEND);
+				}else{//文件不存在或者可写
+					file_put_contents($filename,$data,FILE_APPEND);
+				}
 			}else{
 				echo 'sql日志路径不存在:'._SQL_PATH;
 			}

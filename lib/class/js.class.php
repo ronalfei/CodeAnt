@@ -1,5 +1,5 @@
 <?php
-class common_js
+class js
 {
 	/**
 	 * 让父窗口自动刷新一下.避免有些浏览器有重复提交数据的情况.

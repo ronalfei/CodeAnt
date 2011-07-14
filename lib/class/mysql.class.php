@@ -311,7 +311,7 @@ class mysql
 	{
 		$set	= $this->compileSetValue($setParams);
 		$where	= $this->compileWhereSql($whereParams);
-		$sql	= " update `$tableName` ".$set.$where;
+		$sql	= " update `$tableName` ".$set.$where." limit 1";
 		return $this->update($sql);
 	}
 	
