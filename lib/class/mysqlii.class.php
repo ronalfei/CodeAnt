@@ -200,6 +200,12 @@ class mysqlii
 		return $this->fetchObject($sql);
 	}
 
+	
+	public function getResource($sql)
+	{
+		return $this->query($sql);
+	}
+	
 	/**
 	 * 数据库关闭函数
 	 * 并且销毁该数据库对象的实例
