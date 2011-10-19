@@ -3,7 +3,6 @@ a:hover  { color:#428EFF }
 body 
 {
     FONT-SIZE: 12px;
-    COLOR: #000000;
     FONT-FAMILY: 宋体;
     background-color: #f2f2f2; 
     text-color:#000000;
@@ -27,6 +26,17 @@ td.forumHeaderBackgroundAlternate
 #TableTitleLink A:hover {
 	COLOR: #FFFFFF;
 	TEXT-DECORATION: underline;}
+
+tr.forumRow
+{
+    background-color:#E6E6E6;
+    word-break:break-all;
+}
+tr.forumRowHighlight
+{
+    background-color:#DBDBDB;
+    word-break:break-all;
+}
 td.forumRow
 {
     background-color:#E6E6E6;
@@ -37,6 +47,8 @@ td.forumRowHighlight
     background-color:#DBDBDB;
     word-break:break-all;
 }
+
+
 .tableBorder
 {
     border: 1px #000000 solid; 
