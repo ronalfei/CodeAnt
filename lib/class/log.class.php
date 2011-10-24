@@ -13,7 +13,7 @@ class log
 		$params['what']		= $what;
 		$params['when']		= date('Y-m-d H:i:s');
 
-		$dir = _ROOT.'logs/option/';
+		$dir = _OPTION_PATH;
 		if(file_exists ( $dir)){
 			$filename = $dir.'option.'.date('Ymd').'.log';
 			$data = "[{$params['when']}]  {$params['what']} .\r\n";

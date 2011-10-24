@@ -6,39 +6,40 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 }else{
 	//***********站点通用定义*************
 	if(PHP_OS=='WINNT'){
-		define('_WEB_DOMAIN','http://ca.fei.com/');
+		define('_WEB_DOMAIN','/');
 		//********数据库连接配置***************
 		//DB_TYPE类型有mysql和mysqlii
-		define('_DB_TYPE','mysqlii');							//配置数据库类型
-		define('_DB_HOST','localhost');					//配置数据库主机名
-		define('_DB_PORT','3306');								//配置数据库主机名
-		define('_DB_USER','root');								//配置数据库连接用户名
-		define('_DB_PASSWORD','ronalfei');						//配置数据库连接密码
-		define('_DB_NAME','sdn_v1');						//配置默认连接数据库名
-		define('_DB_CHARSET','utf8');							//配置数据库字符集
-		//**************************************
-	}else{
-		define('_WEB_DOMAIN','http://ca.fei.com/');
-		//********数据库连接配置***************
-		//DB_TYPE类型有mysql和mysqlii
-		define('_DB_TYPE','mysqlii');							//配置数据库类型
+		define('_DB_TYPE','mysql');								//配置数据库类型
 		define('_DB_HOST','10.100.120.122');					//配置数据库主机名
 		define('_DB_PORT','3306');								//配置数据库主机名
 		define('_DB_USER','web');								//配置数据库连接用户名
 		define('_DB_PASSWORD','147852369');						//配置数据库连接密码
-		define('_DB_NAME','CLIENT_MOS');						//配置默认连接数据库名
+		define('_DB_NAME','CMS_V1');							//配置默认连接数据库名
+		define('_DB_CHARSET','utf8');							//配置数据库字符集
+		//**************************************
+	}else{
+		define('_WEB_DOMAIN','http://c.cms.com/');
+		//********数据库连接配置***************
+		//DB_TYPE类型有mysql和mysqlii
+		define('_DB_TYPE','mysql');								//配置数据库类型
+		define('_DB_HOST','10.100.120.122');					//配置数据库主机名
+		define('_DB_PORT','3306');								//配置数据库主机名
+		define('_DB_USER','web');								//配置数据库连接用户名
+		define('_DB_PASSWORD','147852369');						//配置数据库连接密码
+		define('_DB_NAME','CMS_V1');							//配置默认连接数据库名
 		define('_DB_CHARSET','utf8');							//配置数据库字符集
 		//**************************************
 	}
-	
+	define('_ADMIN_URL', _WEB_DOMAIN.'super/');
 	define('_WEB_ROOT',_ROOT.'webroot/');
 	define('_CSS_URL','/themes/default/css/');
 	define('_JS_URL','/themes/default/js/');
 	define('_LIB_ROOT',_ROOT.'lib/');
 	define('_CLASS_ROOT',_LIB_ROOT.'class/');
-	define('_DEBUG','Y');						//是否调试模式,必须是(Y,N)之一,调试模式下显示错误在页面上
-	define('_SQL_DEBUG','Y');					//是否在后台记录sql日志(Y-记录;N-不记录)
-	define('_SQL_PATH',_ROOT.'logs/');			//sql日志的目录
+	define('_DEBUG','Y');									//是否调试模式,必须是(Y,N)之一,调试模式下显示错误在页面上
+	define('_SQL_DEBUG','Y');								//是否在后台记录sql日志(Y-记录;N-不记录)
+	define('_SQL_PATH',_ROOT.'logs/sql/');					//sql日志的目录
+	define('_OPTION_PATH',_ROOT.'logs/option/');			//sql日志的目录
 	//************************************
 
 	//********缓存配置*********************
@@ -58,9 +59,9 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	//***************************************
 	
 	//*********消息队列服务器配置*************
-	$t_mq_config =serialize( array('host'=>'10.11.5.207','port'=>21112));
-	define('_MQ',$t_mq_config);
-	unset($t_mq_config);
+	//$t_mq_config =serialize( array('host'=>'10.11.5.207','port'=>21112));
+	//define('_MQ',$t_mq_config);
+	//unset($t_mq_config);
 	//***************************************
 	
 	
@@ -111,7 +112,7 @@ function __autoload($className)
 	}else{
 		print($module_path.'不存在');
 		$t = func_get_args();
-		var_dump($t);
+		//var_dump($t);
 		debug_print_backtrace();
 	}
 }
