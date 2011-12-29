@@ -77,7 +77,10 @@ class ldap
 	 */
 	public function unbind()
 	{
-		return ldap_unbind($this->link);
+		if($this->link!==false){
+			ldap_unbind($this->link);
+			$this->link = false;
+		}
 	}
 	
 	
@@ -87,7 +90,7 @@ class ldap
 	 */
 	public function close()
 	{
-		return $this->unbind();
+		$this->unbind();
 	}
 	
 	
@@ -97,7 +100,7 @@ class ldap
 	 */
 	public function __destruct()
 	{
-		$this->close($this->link);
+		$this->close();
 	}
 }
 
