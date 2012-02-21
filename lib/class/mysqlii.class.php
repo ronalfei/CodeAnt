@@ -144,7 +144,7 @@ class mysqlii
 	 * @param string $sql
 	 * @return Array
 	 */
-	public function fetchArray($sql,$sort=MYSQL_ASSOC)
+	public function fetchArray($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		$result = array();
 		$resource = $this->query($sql);
@@ -156,16 +156,16 @@ class mysqlii
 		return $result;
 	}
 
-	public function getArray($sql,$sort=MYSQL_ASSOC)
+	public function getArray($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		return $this->fetchArray($sql,$sort);
 	}
-	public function getAll($sql,$sort=MYSQL_ASSOC)
+	public function getAll($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		return $this->fetchArray($sql,$sort);
 	}
 
-	public function fetchRow($sql,$sort=MYSQL_ASSOC)
+	public function fetchRow($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		$temp = $this->fetchArray($sql,$sort);
 		if(!empty($temp)){
@@ -174,7 +174,7 @@ class mysqlii
 			return $temp;
 		}
 	}
-	public function getRow($sql,$sort=MYSQL_ASSOC)
+	public function getRow($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		return $this->fetchRow($sql,$sort);
 	}
@@ -282,6 +282,10 @@ class mysqlii
 		return ' set '.$str;
 		
 	}
+	public function compileSetSql($params)
+	{
+		return $this->compileSetValue($params);
+	}
 	
 	public function autoInsert($tableName,$params)
 	{
@@ -378,6 +382,17 @@ class mysqlii
 		$sql = " select {$fields} from {$tableName} {$wheres} {$orders} {$limits}";
 		
 		return $this->getAll($sql);
+	}
+	
+	public function selectOne($tableName,$field=array(),$where=array(),$order='',$sort='',$start=0,$limit=0)
+	{
+		$result = $this->select($tableName,$field,$where,$order,$sort,$start,$limit);
+		$index = $field[0];
+		if(!empty($result[0][$index])){
+			return $result[0][$index];
+		}else{
+			return "";
+		}
 	}
 	
 	

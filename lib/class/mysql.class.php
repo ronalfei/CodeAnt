@@ -167,7 +167,7 @@ class mysql
 	 * @param string $sql
 	 * @return Array
 	 */
-	public function fetchArray($sql,$sort=MYSQL_ASSOC)
+	public function fetchArray($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		$result = array();
 		$resource = $this->query($sql);
@@ -179,16 +179,16 @@ class mysql
 		return $result;
 	}
 
-	public function getArray($sql,$sort=MYSQL_ASSOC)
+	public function getArray($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		return $this->fetchArray($sql,$sort);
 	}
-	public function getAll($sql,$sort=MYSQL_ASSOC)
+	public function getAll($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		return $this->fetchArray($sql,$sort);
 	}
 
-	public function fetchRow($sql,$sort=MYSQL_ASSOC)
+	public function fetchRow($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		$temp = $this->fetchArray($sql,$sort);
 		if(!empty($temp)){
@@ -197,7 +197,7 @@ class mysql
 			return $temp;
 		}
 	}
-	public function getRow($sql,$sort=MYSQL_ASSOC)
+	public function getRow($sql,$sort=MYSQL_RETURN_TYPE)
 	{
 		return $this->fetchRow($sql,$sort);
 	}

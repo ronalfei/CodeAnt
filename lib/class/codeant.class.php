@@ -52,6 +52,20 @@ class codeant
 			//nothing todo ;
 		}
 	}
+	
+	public function debug()
+	{
+		$this->debug->display();
+	}
+	public function display()
+	{
+		$uri = $this->input->uri();
+		$template = str_replace('.php', '.html', $uri);
+		$tpl = substr($template,1);
+		$this->tpl->display($tpl);
+		$this->debug->display();
+	}
+	
 }
 
 ?>
