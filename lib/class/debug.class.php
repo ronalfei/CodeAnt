@@ -424,6 +424,10 @@ class debug {
 		echo "<script>function show_profile(){ var obj=document.getElementById('codeAnt_debug');if(obj.style.display=='none'){obj.style.display='inline';}else{obj.style.display='none';} }</script>";
 		echo "<div onclick='show_profile()' style='color:white;cursor:pointer'>显示调试信息</div>",$this->run();
 	}
+	public function display()
+	{
+		$this->displayProfile();
+	}
 
 }
 ?>

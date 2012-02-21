@@ -10,26 +10,32 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 		//********数据库连接配置***************
 		//DB_TYPE类型有mysql和mysqlii
 		define('_DB_TYPE','mysql');								//配置数据库类型
-		define('_DB_HOST','10.100.120.122');					//配置数据库主机名
+		define('_DB_HOST','127.0.0.1');					//配置数据库主机名
 		define('_DB_PORT','3306');								//配置数据库主机名
-		define('_DB_USER','web');								//配置数据库连接用户名
-		define('_DB_PASSWORD','147852369');						//配置数据库连接密码
-		define('_DB_NAME','CMS_V1');							//配置默认连接数据库名
+		define('_DB_USER','ronalfei');								//配置数据库连接用户名
+		define('_DB_PASSWORD','batisfei');						//配置数据库连接密码
+		define('_DB_NAME','FAMILYOS');							//配置默认连接数据库名
 		define('_DB_CHARSET','utf8');							//配置数据库字符集
 		//**************************************
 	}else{
-		define('_WEB_DOMAIN','http://c.cms.com/');
+		define('_WEB_DOMAIN','/');
 		//********数据库连接配置***************
 		//DB_TYPE类型有mysql和mysqlii
-		define('_DB_TYPE','mysql');								//配置数据库类型
-		define('_DB_HOST','10.100.120.122');					//配置数据库主机名
+		define('_DB_TYPE','mysqlii');								//配置数据库类型
+		define('_DB_HOST','127.0.0.1');						//配置数据库主机名
 		define('_DB_PORT','3306');								//配置数据库主机名
-		define('_DB_USER','web');								//配置数据库连接用户名
-		define('_DB_PASSWORD','147852369');						//配置数据库连接密码
-		define('_DB_NAME','CMS_V1');							//配置默认连接数据库名
+		define('_DB_USER','ronalfei');								//配置数据库连接用户名
+		define('_DB_PASSWORD','batisfei');						//配置数据库连接密码
+		define('_DB_NAME','FAMILYOS');							//配置默认连接数据库名
 		define('_DB_CHARSET','utf8');							//配置数据库字符集
 		//**************************************
 	}
+	if(_DB_TYPE=='mysql'||_DB_TYPE=='mysqlii'){
+		define('MYSQL_RETURN_TYPE',MYSQL_ASSOC);
+	}
+
+
+
 	define('_ADMIN_URL', _WEB_DOMAIN.'super/');
 	define('_WEB_ROOT',_ROOT.'webroot/');
 	define('_CSS_URL','/themes/default/css/');
@@ -81,13 +87,21 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 
 
 	define('_USE_FIRE_PHP', FALSE);										//是否使用FirePHP,默认为不使用
+	
+
+
+
+	define('_SYS_NAME', "Family Manage System");
+
+	define('_SYS_VERSION', "1.0");
+	
 }
 /**
  * 配置用户名验证
  * 
  */
 $check_users = array(
-		'guest'=> 'guest'
+		'ronalfei'=> 'batisfei'
 	);
 //--------------------------------------
 

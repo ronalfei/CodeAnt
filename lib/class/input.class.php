@@ -46,6 +46,10 @@ class input
 		$value = isset($_SERVER['QUERY_STRING'])?$_SERVER['QUERY_STRING']:0;
 		return $this->filter($value,$type);
 	}
+	public function uri()
+	{
+		return $_SERVER['DOCUMENT_URI'];
+	}
 	private function filter($value,$type)
 	{
 		switch($type){
