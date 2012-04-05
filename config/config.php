@@ -38,7 +38,10 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_APP_ROOT', _ROOT.'app/');
 	define('_CONTROLLER_ROOT', _APP_ROOT.'controller/');	
 	define('_MODULE_ROOT', _APP_ROOT.'module/');	
-	define('_DEFAULT_CONTROLLER', 'default');
+	define('_TPL_ROOT', _APP_ROOT.'templates/');
+	define('_TPL_EXT', '.html');
+	define('_DEFAULT_CONTROLLER', 'auto');
+	define('_DEFAULT_METHOD', 'index');
 
 
 
@@ -84,7 +87,7 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_SMARTY_COMPILE_CHECK',TRUE);								//检查模版是否改动过,从而重新编译,上线后应该为false
 	define('_SMARTY_DEBUGGING',FALSE);									//是否输出调试信息
 	define('_SMARTY_CACHEING',FALSE);									//是否启用缓存(动态站点建议不启用)
-	define('_SMARTY_TEMPLATE_DIR',_APP_ROOT.'templates/'); 				//模版存放路径
+	define('_SMARTY_TEMPLATE_DIR',_TPL_ROOT); 							//模版存放路径
 	define('_SMARTY_COMPILE_DIR',_ROOT.'templates_c/');					//模版编译路径,单独提出方便清理
 	define('_SMARTY_CACHE_DIR',_ROOT.'cache/');							//模版编译路径
 	define('_SMARTY_CONFIG_DIR',_SMARTY_ROOT.'config/');				//模版config路径
@@ -127,7 +130,8 @@ function codeAntAutoLoad($className)
 			require_once($path);
 			break;
 		}else{
-			debug_print_backtrace();
+			//因为smarty3.0 也用到了autoload函数, 这里就不能显示错误了.
+			//debug_print_backtrace();
 		}
 	}
 

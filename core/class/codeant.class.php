@@ -23,6 +23,9 @@ class codeant
 	public $memc		= "";
 	public $debug		= "";
 
+	public $controller;
+	public $method;
+
 	public function __construct()
 	{
 		require_once(_CORE_ROOT.'class/factory.class.php');
@@ -58,11 +61,17 @@ class codeant
 	}
 	public function display()
 	{
-		$uri = $this->input->uri();
-		$template = str_replace('.php', '.html', $uri);
-		$tpl = substr($template,1);
+		$tpl = "{$this->controller}/{$this->method}"._TPL_EXT;
 		$this->tpl->display($tpl);
-		$this->debug->display();
+		$this->debug();
+	}
+	private function setController($controller)
+	{
+		$this->controller = $controller;
+	}
+	private function setMethod($method)
+	{
+		$this->method = $method;
 	}
 	public function run()
 	{
@@ -76,17 +85,27 @@ class codeant
 		            )
 		        );
 		if(empty($uri[0])){//没有获取到控制器名称,则加载默认控制器
-		    $controller = _DEFAULT_CONTROLLER;
-		    $method = "index";
+		    $controller	= _DEFAULT_CONTROLLER;
+		    $method		= _DEFAULT_METHOD;
+			$params		= Array();
 		}else{
 		    $controller = $uri[0];
-		    $method = empty($uri[1])?"index":$uri[1];
+		    $method = empty($uri[1])?_DEFAULT_METHOD:$uri[1];
 		    $params = array_slice($uri, 2, -1);
 		}
+		if(class_exists($controller)){
+			$object = new $controller();
+		}else{
+			die("控制器:{$controller}不存在");
+		}
+		if(method_exists($object, $method)){
+			$this->setController($controller);
+			$this->setMethod($method);
+			call_user_func_array(array($object,$method), $params);
+		}else{
+			die("该控制器:{$controller}的方法:{$method}不存在");
+		}
 		
-		$object = new $controller();
-		
-		call_user_func_array(array($object,$method), $params);
 	}
 	
 }
