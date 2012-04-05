@@ -116,8 +116,8 @@ function codeAntAutoLoad($className)
 {
 	//可以根据索引来调整加载文件的先后顺序
 	$file_path[1] = _CORE_ROOT.'class/'."{$className}.class.php"; //先到Core的class里找对象
-	$file_path[2] = _CONTROLLER_ROOT."{$className}.controller.php"; 
-	$file_path[3] = _MODULE_ROOT."{$className}.module.php"; 
+	$file_path[2] = _CONTROLLER_ROOT."{$className}.class.php"; 
+	$file_path[3] = _MODULE_ROOT."{$className}.class.php"; 
 	$file_path[4] = _LIB_ROOT."{$className}.class.php"; 
 	
 	ksort($file_path);
