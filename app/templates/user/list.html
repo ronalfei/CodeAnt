@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>Content</title>
+{{include file="css.htm"}}
+{{include file="js.htm"}}
+{{include file="colorbox.htm"}}
+</head>
+
+<body >
+<table width="98%" cellspacing="1" cellpadding="3" border="0" align="center" class="tableBorder">
+  <tbody><tr>
+    <td height="25" align="center" colspan="5">
+	<b><font color="white">
+	用户列表
+	</b></td>
+  </tr>
+  <tr>
+  	<td height="23" align="right"  background="{{$smarty.const._CSS_URL}}images/control_bg_1.gif"  colspan="5">
+  	[<a href="/user/form.php?method=add" class="example5" >添加用户</a>]
+  	</td>
+  </tr>
+  <tr>
+	<td width="10%" height="23" align="center" class="forumRow">ID</td>
+	<td width="15%" height="23" align="center" class="forumRow">姓名</td>
+	<td width="15%" height="23" align="center" class="forumRow">电话</td>
+	<td width="35%" height="23" align="center" class="forumRow">备注</td>
+	<td width="25%" height="23" align="center" class="forumRow">操作</td>
+  </tr>
+  {{foreach from=$data item=i}}
+  <tr id="tr_{{$i.user_id}}"   class="{{cycle name='c1' values='forumRow,forumRowHighlight'}}" 
+  		onMouseOver="changeClass('tr_{{$i.user_id}}','formOver')" 
+  		onMouseOut='changeClass("tr_{{$i.user_id}}", "{{cycle name="c2" values="forumRow,forumRowHighlight"}}")'>
+	<td width="10%" height="23" align="center" >{{$i.user_id}}</td>
+	<td width="15%" height="23" align="center" ><a href="/gift/list.php?user_id={{$i.user_id}}" style="color:blue" >{{$i.name}}</a></td>
+	<td width="15%" height="23" align="center" >{{$i.phone}}</td>
+	<td width="35%" height="23" align="center" >{{$i.memo}}</td>
+	<td width="25%" height="23" align="center" >
+		[<a href="/user/form.php?method=modify&user_id={{$i.user_id}}" class="example5" >修改</a>]
+		[<a href="/gift/form.php?type=receive&user_id={{$i.user_id}}" class="example5" >他给我</a>]
+		[<a href="/gift/form.php?type=give&user_id={{$i.user_id}}" class="example5" >送给他</a>]</br>
+		[<a href="/gift/list.php?user_id={{$i.user_id}}" style="color:blue" >礼品详细列表</a>]
+		[<a href="javascript:void(0);" onclick="deleteUser('{{$i.user_id}}')" target="back" style="color:red" >删除</a>]
+	</td>
+  </tr>
+  {{/foreach}}
+  <tr>
+	<td height="23" align="left" class="forumRowHighlight" colspan="8">
+	{{$pageform}}
+	</td>
+  </tr>
+</tbody></table>
+{{include file="hidden.htm"}}
+</body>
+<script>
+function deleteUser(uid)
+{
+	if(confirm("您确定要删除该用户吗?删除后将无法恢复!!")){
+		$id('back').src="/user/action/do.php?user_id="+uid+"&action=delete";
+	}
+}
+
+</script>
+
+</html>

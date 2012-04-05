@@ -1,0 +1,54 @@
+<html>
+<head></head>
+<body>
+<form method="POST" target="back" action="/gift/action/do.php" >
+<input type="hidden" value="{{$data[0].user_id}}" name="user_id" />
+<input type="hidden" value="{{$data[0].name}}" name="name" />
+<input type="hidden" value="{{$gift_data.gift_id}}" name="gift_id" />
+<input type="hidden" value="{{$action}}" name="action" />
+<table width="98%" cellspacing="1" cellpadding="3" border="0" align="center" class="tableBorder">
+  <tbody><tr>
+    <td height="25" background="{{$smarty.const._CSS_URL}}images/control_bg_1.gif" align="center" colspan="2">
+	<b><font color="white">
+		{{if $smarty.get.type=='receive'}}{{$data[0].name}}送我礼
+		{{elseif $smarty.get.type=='give'}}
+			我送{{$data[0].name}}礼
+		{{else}}
+			{{$data[0].name}}
+		{{/if}}
+	</font>
+	</b></td>
+  </tr>
+  <tr>
+	<td width="15%" height="23" align="right" class="forumRow">钱：</td>
+	<td width="85%" height="23" align="left" class="forumRowHighlight">
+		<input type="text" value="{{$gift_data.money}}" size="40" id="money" name="money" />
+	</td>
+  </tr>
+  <tr>
+	<td height="23" align="right" class="forumRow">礼物：</td>
+	<td height="23" align="left" class="forumRowHighlight">
+		<input type="text" value="{{$gift_data.gift}}" size="40" name="gift" />
+	</td>
+  </tr>
+  <tr>
+	<td height="23" align="right" class="forumRow">备注：</td>
+	<td height="23" align="left" class="forumRowHighlight">
+		<input type="text" value="{{$gift_data.memo}}" size="40" name="memo" />
+	</td>
+  </tr>
+  <tr>
+	<td height="23" align="center" class="forumRow" colspan="2">
+		<input type="submit" value="提交" />
+		<input type="reset" value="重置" />
+	</td>
+  </tr>
+</tbody></table>
+</form>
+<script>
+function bodyLoaded(){
+	$id('money').focus();
+}
+</script>
+</body>
+</html>

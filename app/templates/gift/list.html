@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>Content</title>
+{{include file="css.htm"}}
+{{include file="js.htm"}}
+{{include file="colorbox.htm"}}
+</head>
+
+<body >
+<table width="98%" cellspacing="1" cellpadding="3" border="0" align="center" class="tableBorder">
+  <tbody><tr>
+    <td height="25" align="center" colspan="7">
+	<b><font color="white">
+	{{if empty($userinfo[0].name)}}
+	礼尚往来列表
+	{{else}}
+	{{$userinfo[0].name}}的礼尚往来
+	{{/if}}
+	</b></td>
+  </tr>
+  <tr>
+  	<td height="23" align="right"  background="{{$smarty.const._CSS_URL}}images/control_bg_1.gif"  colspan="7">
+	{{if empty($userinfo[0].name)}}
+	{{else}}
+  	[<a href="/gift/form.php?type=receive&user_id={{$userinfo[0].user_id}}" class="example5" >他送我</a>]
+  	[<a href="/gift/form.php?type=give&user_id={{$userinfo[0].user_id}}" class="example5" >送他礼</a>]
+	{{/if}}
+  	</td>
+  </tr>
+  <tr>
+	<td width="5%" height="23" align="center" class="forumRow">ID</td>
+	<td width="15%" height="23" align="center" class="forumRow">姓名</td>
+	<td width="10%" height="23" align="center" class="forumRow">钱</td>
+	<td width="20%" height="23" align="center" class="forumRow">礼品</td>
+	<td width="20%" height="23" align="center" class="forumRow">备注</td>
+	<td width="10%" height="23" align="center" class="forumRow">插入时间</td>
+	<td width="20%" height="23" align="center" class="forumRow">操作</td>
+  </tr>
+  {{foreach from=$data item=i}}
+  <tr id="tr_{{$i.gift_id}}"   class="{{cycle name='c1' values='forumRow,forumRowHighlight'}}" 
+        onMouseOver="changeClass('tr_{{$i.gift_id}}','formOver')" 
+        onMouseOut='changeClass("tr_{{$i.gift_id}}", "{{cycle name="c2" values="forumRow,forumRowHighlight"}}")'>
+	<td width="5%" height="23" align="center" >{{$i.gift_id}}</td>
+	<td width="15%" height="23" align="center" ><a href="/gift/list.php?user_id={{$i.user_id}}" style="color:blue" >{{$i.name}}</a></td>
+	<td width="10%" height="23" align="center" >{{$i.money}}</td>
+	<td width="20%" height="23" align="center" >{{$i.gift}}</td>
+	<td width="20%" height="23" align="center" >{{$i.memo}}</td>
+	<td width="10%" height="23" align="center" >{{$i.insert_time}}</td>
+	<td width="10%" height="23" align="center" >
+		[<a href="/gift/form.php?type=modify&gift_id={{$i.gift_id}}&user_id={{$i.user_id}}" class="example5" >修改</a>]
+	</td>
+  </tr>
+  {{/foreach}}
+  <tr>
+	<td height="23" align="left" class="forumRowHighlight" colspan="7">
+	{{$pageform}}
+	</td>
+  </tr>
+</tbody></table>
+{{include file="hidden.htm"}}
+</body>
+
+</html>
