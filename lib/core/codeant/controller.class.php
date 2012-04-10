@@ -1,9 +1,14 @@
 <?php
 class controller 
 {
-	protected $codeAnt;
+	private $codeAnt;
 	
 	public function __construct()
+	{
+		$this->setCodeAnt();
+	}
+
+	private function setCodeAnt()
 	{
 		global $codeAnt;
 		$this->codeAnt = &$codeAnt;
@@ -14,14 +19,20 @@ class controller
 		global $codeAnt;
 		return $codeAnt;
 	}
+
 	public function __get($var_name)
 	{
 		if(strtolower($var_name)=='codeant'){
-			return $this->codeAnt;
+			global $codeAnt;
+			$autoGet = &$codeAnt;
+			return $autoGet; 
 		}else{
-			$var_name = addslashs($var_name);
+			$var_name = addslashes($var_name);
 			die("你访问的变量{$var_name}不存在");
 		}
 		
 	}
 }
+
+
+?>
