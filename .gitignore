@@ -1,0 +1,12 @@
+*.log
+*.html.php
+*.js
+*.sql
+*.css
+*.sql
+*.gif
+*.jpeg
+*.jpg
+*.png
+app/templates/*
+*.htm
