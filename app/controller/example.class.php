@@ -1,5 +1,5 @@
 <?php
-class auto extends controller
+class example extends controller
 {
 	public function index()
 	{

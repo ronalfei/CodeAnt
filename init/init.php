@@ -20,9 +20,9 @@ date_default_timezone_set('PRC');
 
 require_once(_ROOT.'config/config.php');
 require_once(_SMARTY_ROOT.'Smarty.class.php');
-require_once(_CORE_ROOT.'class/codeant.class.php');
+require_once(_CORE_ROOT.'codeant/codeant.class.php');
 if(_USE_FIRE_PHP){
-	require_once(_LIB_ROOT.'FirePHPCore/fb.php');
+	require_once(_PLUGIN_ROOT.'FirePHPCore/fb.php');
 }
 
 ////------判断是否需要登陆验证--------

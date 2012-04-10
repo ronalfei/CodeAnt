@@ -34,7 +34,11 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 		define('MYSQL_RETURN_TYPE', MYSQL_ASSOC);
 	}
 	
-
+	//system config
+	define('_SYS_NAME', "Family Manage System");
+	define('_SYS_VERSION', "1.0");
+	
+	//App root config include MVC dir/path config
 	define('_APP_ROOT', _ROOT.'app/');
 	define('_CONTROLLER_ROOT', _APP_ROOT.'controller/');	
 	define('_MODULE_ROOT', _APP_ROOT.'module/');	
@@ -44,17 +48,37 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_DEFAULT_METHOD', 'index');
 
 
+	//Lib root config
+	define('_LIB_ROOT', _ROOT.'lib/');
+
+	//core root config
+	define('_CORE_ROOT', _LIB_ROOT.'core/');
+
+	//plugin root config
+	define('_PLUGIN_ROOT', _LIB_ROOT.'plugin/');
+
+	//class root config
+	define('_CLASS_ROOT', _LIB_ROOT.'class/');
+
+
+	//webroot config
+	define('_WEB_ROOT', _ROOT.'webroot/');
+	
+	//var root config
+	define('_VAR_ROOT', _ROOT.'var/');
+	
+
+
 
 	//define('_ADMIN_URL', _WEB_DOMAIN.'super/');
-	define('_WEB_ROOT', _ROOT.'webroot/');
 	define('_CSS_URL', '/themes/default/css/');
 	define('_JS_URL', '/themes/default/js/');
-	define('_LIB_ROOT', _ROOT.'lib/');
-	define('_CORE_ROOT', _ROOT.'core/');
+
+	//
 	define('_DEBUG', 'Y');									//是否调试模式,必须是(Y,N)之一,调试模式下显示错误在页面上
 	define('_SQL_DEBUG', 'Y');								//是否在后台记录sql日志(Y-记录;N-不记录)
-	define('_SQL_PATH', _ROOT.'logs/sql/');					//sql日志的目录
-	define('_OPTION_PATH', _ROOT.'logs/option/');			//sql日志的目录
+	define('_SQL_PATH', _VAR_ROOT.'logs/sql/');					//sql日志的目录
+	define('_OPTION_PATH', _VAR_ROOT.'logs/option/');			//sql日志的目录
 	//************************************
 
 	//********缓存配置*********************
@@ -88,8 +112,7 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_SMARTY_DEBUGGING',FALSE);									//是否输出调试信息
 	define('_SMARTY_CACHEING',FALSE);									//是否启用缓存(动态站点建议不启用)
 	define('_SMARTY_TEMPLATE_DIR',_TPL_ROOT); 							//模版存放路径
-	define('_SMARTY_COMPILE_DIR',_ROOT.'templates_c/');					//模版编译路径,单独提出方便清理
-	define('_SMARTY_CACHE_DIR',_ROOT.'cache/');							//模版编译路径
+	define('_SMARTY_COMPILE_DIR',_VAR_ROOT.'templates_c/');					//模版编译路径,单独提出方便清理
 	define('_SMARTY_CONFIG_DIR',_SMARTY_ROOT.'config/');				//模版config路径
 	define('_SMARTY_LEFT_DELIMITER','{{');								//smarty脚本起始符
 	define('_SMARTY_RIGHT_DELIMITER','}}');								//smarty脚本结束符
@@ -101,9 +124,6 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 
 
 
-	define('_SYS_NAME', "Family Manage System");
-
-	define('_SYS_VERSION', "1.0");
 	
 }
 /**
@@ -118,10 +138,10 @@ $check_users = array(
 function codeAntAutoLoad($className)
 {
 	//可以根据索引来调整加载文件的先后顺序
-	$file_path[1] = _CORE_ROOT.'class/'."{$className}.class.php"; //先到Core的class里找对象
+	$file_path[1] = _CORE_ROOT.'codeant/'."{$className}.class.php"; //先到Core的核心文件夹里找对象
 	$file_path[2] = _CONTROLLER_ROOT."{$className}.class.php"; 
 	$file_path[3] = _MODULE_ROOT."{$className}.class.php"; 
-	$file_path[4] = _LIB_ROOT."{$className}.class.php"; 
+	$file_path[4] = _PLUGIN_ROOT."{$className}.class.php"; 
 	
 	ksort($file_path);
 
