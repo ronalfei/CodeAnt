@@ -44,7 +44,7 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_MODULE_ROOT', _APP_ROOT.'module/');	
 	define('_TPL_ROOT', _APP_ROOT.'templates/');
 	define('_TPL_EXT', '.html');
-	define('_DEFAULT_CONTROLLER', 'auto');
+	define('_DEFAULT_CONTROLLER', 'frame');					//controller 默认名字不能用index
 	define('_DEFAULT_METHOD', 'index');
 
 

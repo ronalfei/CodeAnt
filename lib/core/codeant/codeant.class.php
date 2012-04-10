@@ -98,10 +98,11 @@ class codeant
 		}else{
 			die("控制器:{$controller}不存在");
 		}
-		if(method_exists($object, $method)){
+		$_method = "_{$method}";				//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
+		if(method_exists($object, $_method)){
 			$this->setController($controller);
 			$this->setMethod($method);
-			call_user_func_array(array($object,$method), $params);
+			call_user_func_array(array($object,$_method), $params);
 		}else{
 			die("该控制器:{$controller}的方法:{$method}不存在");
 		}

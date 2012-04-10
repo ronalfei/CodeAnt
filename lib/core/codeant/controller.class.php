@@ -1,7 +1,7 @@
 <?php
 class controller 
 {
-	private $codeAnt;
+	protected $codeAnt;
 	
 	public function __construct()
 	{

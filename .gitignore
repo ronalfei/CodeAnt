@@ -1,5 +1,6 @@
 *.log
 *.html.php
+*.htm.php
 *.js
 *.sql
 *.css
@@ -10,3 +11,5 @@
 *.png
 app/templates/*
 *.htm
+frame.class.php
+user.class.php
