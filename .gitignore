@@ -13,3 +13,5 @@ app/templates/*
 *.htm
 frame.class.php
 user.class.php
+app/module/gift.class.php
+app/module/user.class.php
