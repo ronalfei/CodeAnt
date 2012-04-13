@@ -137,22 +137,25 @@ $check_users = array(
 
 function codeAntAutoLoad($className)
 {
-	//可以根据索引来调整加载文件的先后顺序
-	$file_path[1] = _CORE_ROOT.'codeant/'."{$className}.class.php"; //先到Core的核心文件夹里找对象
-	$file_path[2] = _CONTROLLER_ROOT."{$className}.class.php"; 
-	$file_path[3] = _MODULE_ROOT."{$className}.class.php"; 
-	$file_path[4] = _PLUGIN_ROOT."{$className}.class.php"; 
-	
-	ksort($file_path);
-
-	foreach($file_path as $path){
-		if(file_exists($path)){
-			require_once($path);
+	$file_path = "";
+	$temp   = explode('_',$className);
+	if(count($temp)==2){
+		switch($temp[0]){
+			case 'c':
+				$file_path = _CONTROLLER_ROOT."{$temp[1]}.class.php";
 			break;
-		}else{
-			//因为smarty3.0 也用到了autoload函数, 这里就不能显示错误了.
-			//debug_print_backtrace();
+			case 'm':
+				$file_path = _MODULE_ROOT."{$temp[1]}.class.php";
+			break;
 		}
+	}else{
+		$file_path = _CLASS_ROOT."{$className}.class.php";
+		//nothing todo
+		//因为smarty3.0 也用到了autoload函数, 这里就不能显示错误了.
+		//debug_print_backtrace();
+	}
+	if(file_exists($file_path)){
+		require_once($file_path);
 	}
 
 }

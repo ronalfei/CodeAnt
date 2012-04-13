@@ -93,12 +93,20 @@ class codeant
 		    $method = empty($uri[1])?_DEFAULT_METHOD:$uri[1];
 		    $params = array_slice($uri, 2, -1);
 		}
-		if(class_exists($controller)){
-			$object = new $controller();
+
+		$controller_file_path  = _CONTROLLER_ROOT."{$controller}.class.php";
+		if(file_exists($controller_file_path)){
+			include_once($controller_file_path);
+		}else{
+			die("文件{$controller}.class.php不存在");
+		}
+		$_controller = "c_{$controller}";				//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
+		$_method = "_{$method}";						//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
+		if(class_exists($_controller)){
+			$object = new $_controller();
 		}else{
 			die("控制器:{$controller}不存在");
 		}
-		$_method = "_{$method}";				//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
 		if(method_exists($object, $_method)){
 			$this->setController($controller);
 			$this->setMethod($method);

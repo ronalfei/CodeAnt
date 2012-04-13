@@ -1,5 +1,5 @@
 <?php
-class dao_example
+class example extends module
 {
 	
 }
