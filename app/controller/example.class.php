@@ -1,31 +1,17 @@
 <?php
-class example extends controller
+class controller_example extends controller
 {
-	public function index()
+	public function action_index()
 	{
 		$this->codeant->display();
 		//or
 		//$this->codeAnt->tpl("frame/index.htm");
 		//$this->codeAnt->debug();
 	}
-	public function bottom()
+	public function action_bottom()
 	{
 		$this->codeant->display();
 	}
 	
-	public function menu()
-    {
-        $this->codeant->display();
-    }
-
-	public function content()
-    {
-        $this->codeant->display();
-    }
-	
-	public function top()
-	{
-		$this->codeant->display();
-	}
 }
 ?>

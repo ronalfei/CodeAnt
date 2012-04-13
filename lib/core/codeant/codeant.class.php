@@ -24,7 +24,7 @@ class codeant
 	public $debug		= "";
 
 	public $controller;
-	public $method;
+	public $action;
 
 	public function __construct()
 	{
@@ -69,9 +69,9 @@ class codeant
 	{
 		$this->controller = $controller;
 	}
-	private function setMethod($method)
+	private function setMethod($action)
 	{
-		$this->method = $method;
+		$this->method = $action;
 	}
 	public function run()
 	{
@@ -86,12 +86,12 @@ class codeant
 		        );
 		if(empty($uri[0])){//没有获取到控制器名称,则加载默认控制器
 		    $controller	= _DEFAULT_CONTROLLER;
-		    $method		= _DEFAULT_METHOD;
+		    $action		= _DEFAULT_METHOD;
 			$params		= Array();
 		}else{
 		    $controller = $uri[0];
-		    $method = empty($uri[1])?_DEFAULT_METHOD:$uri[1];
-		    $params = array_slice($uri, 2, -1);
+		    $action = empty($uri[1])?_DEFAULT_METHOD:$uri[1];
+		    $params = array_slice($uri, 2);
 		}
 
 		$controller_file_path  = _CONTROLLER_ROOT."{$controller}.class.php";
@@ -100,19 +100,19 @@ class codeant
 		}else{
 			die("文件{$controller}.class.php不存在");
 		}
-		$_controller = "c_{$controller}";				//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
-		$_method = "_{$method}";						//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
+		$_controller = "controller_{$controller}";					//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
+		$_action = "action_{$action}";								//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
 		if(class_exists($_controller)){
 			$object = new $_controller();
 		}else{
 			die("控制器:{$controller}不存在");
 		}
-		if(method_exists($object, $_method)){
+		if(method_exists($object, $_action)){
 			$this->setController($controller);
-			$this->setMethod($method);
-			call_user_func_array(array($object,$_method), $params);
+			$this->setMethod($action);
+			call_user_func_array(array($object,$_action), $params);
 		}else{
-			die("该控制器:{$controller}的方法:{$method}不存在");
+			die("该控制器:{$controller}的方法:{$action}不存在");
 		}
 		
 	}

@@ -1,5 +1,5 @@
 <?php
-class example extends module
+class module_example extends module
 {
 	
 }

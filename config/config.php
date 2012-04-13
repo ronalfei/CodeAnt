@@ -2,7 +2,7 @@
 
 if(!defined('_ROOT'))								//root的定义在init.php文件中.
 {
-	echo "根目录_ROOT未定义";
+	die("根目录_ROOT未定义,请到init/init.php下定义");
 }else{
 	//***********站点通用定义*************
 	if(PHP_OS=='WINNT'){
@@ -35,8 +35,8 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	}
 	
 	//system config
-	define('_SYS_NAME', "Family Manage System");
-	define('_SYS_VERSION', "1.0");
+	define('_SYS_NAME', "CodeAnt FrameWork");
+	define('_SYS_VERSION', "2.0");
 	
 	//App root config include MVC dir/path config
 	define('_APP_ROOT', _ROOT.'app/');
@@ -126,26 +126,22 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 
 	
 }
-/**
- * 配置用户名验证
- * 
- */
-$check_users = array(
-		'ronalfei'=> 'batisfei'
-	);
-//--------------------------------------
 
 function codeAntAutoLoad($className)
 {
 	$file_path = "";
 	$temp   = explode('_',$className);
-	if(count($temp)==2){
+	if(count($temp) > 1){
 		switch($temp[0]){
-			case 'c':
+			case 'controller':
 				$file_path = _CONTROLLER_ROOT."{$temp[1]}.class.php";
 			break;
-			case 'm':
+			case 'module':
 				$file_path = _MODULE_ROOT."{$temp[1]}.class.php";
+			break;
+			
+			default:
+				$file_path = _CLASS_ROOT."{$className}.class.php";
 			break;
 		}
 	}else{
