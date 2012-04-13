@@ -58,7 +58,7 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_PLUGIN_ROOT', _LIB_ROOT.'plugin/');
 
 	//class root config
-	define('_CLASS_ROOT', _LIB_ROOT.'class/');
+	define('_CLASS_ROOT', _LIB_ROOT.'common/');
 
 
 	//webroot config
