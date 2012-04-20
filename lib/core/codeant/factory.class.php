@@ -77,6 +77,12 @@ class factory
 		$memc = new memc();
 		return $memc;
 	}
+	static public function & createLogger()
+	{
+		require_once(_CORE_ROOT.'codeant/log.class.php');
+		$logger = new log();
+		return $logger;
+	}
 }
 
 ?>

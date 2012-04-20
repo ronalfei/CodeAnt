@@ -79,6 +79,7 @@ if(!defined('_ROOT'))								//root的定义在init.php文件中.
 	define('_SQL_DEBUG', 'Y');								//是否在后台记录sql日志(Y-记录;N-不记录)
 	define('_SQL_PATH', _VAR_ROOT.'logs/sql/');					//sql日志的目录
 	define('_OPTION_PATH', _VAR_ROOT.'logs/option/');			//sql日志的目录
+	define('_OPTION_LOG_LEVEL', 'DEBUG');				//DEBUG > INFO > WARNING >  ERROR
 	//************************************
 
 	//********缓存配置*********************

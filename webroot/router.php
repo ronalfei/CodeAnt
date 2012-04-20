@@ -5,9 +5,11 @@ include_once("../init/init.php");
 try{
 	$codeAnt->run();
 }catch(Exception $e){
-	echo "<br/>\r\n----------exception throw:--------------<br/>\r\n";
-	echo $e->getMessage().debug_print_backtrace();
-	echo "<br/>\r\n----------------------------------------<br/>\r\n";
+	$exception  = "<br/>\r\n----------exception throw:--------------<br/>\r\n";
+	$exception .= $e->getMessage().debug_print_backtrace();
+	$exception .= "<br/>\r\n----------------------------------------<br/>\r\n";
+	echo $exception;
+	$codeAnt->log->error($exception);
 }
 
 ?>
