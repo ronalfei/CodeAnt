@@ -42,10 +42,10 @@ class mysql
 			return true;
 		}else{
 			//创建数据库连接ID
-			$this -> link = mysql_connect("{$this->host}:{$this->port}",$this->user,$this->password) or die("--Can't connect Mysql!".mysql_error() . debug_print_backtrace() );
+			$this -> link = mysql_connect("{$this->host}:{$this->port}",$this->user,$this->password) or $this->error("--Can't connect Mysql!".mysql_error());
 			//选择需要使用的数据库
 			$sql = "use $this->db_name";
-			mysql_query($sql,$this->link) or die( mysql_error().'</br>'.debug_print_backtrace());
+			mysql_query($sql,$this->link) or $this->error( mysql_error());
 			//设置数据库字符集
 			$sql = "SET character_set_connection='".$this->charset."', character_set_results='".$this->charset."', character_set_client=binary";
 			//$sql = "SET NAMES $this->charset";
@@ -111,7 +111,7 @@ class mysql
 		$start_time = time()+microtime();
 			
 		$this->connectDb();
-		$resource	= mysql_query($sql,$this->link) or die("--Query Language Error:{$sql}". mysql_error().debug_print_backtrace() );
+		$resource	= mysql_query($sql,$this->link) or $this->error("--Query Language Error:{$sql}". mysql_error());
 			
 		$end_time	= time()+microtime();
 		$time		= strval($end_time-$start_time);
@@ -131,7 +131,7 @@ class mysql
 	{
 		$resource = $this->query($sql);
 		$numRows  = mysql_num_rows($resource);
-		mysql_free_result($resource) or die("--Release Resource Failed".mysql_error().debug_print_backtrace() );
+		mysql_free_result($resource) or $this->error("--Release Resource Failed".mysql_error() );
 		return $numRows;
 	}
 
@@ -151,7 +151,7 @@ class mysql
 		{
 			$result=$row[0];
 		}
-		mysql_free_result($resource) or die("--Release Resource Failed". mysql_error().debug_print_backtrace() );
+		mysql_free_result($resource) or $this->error("--Release Resource Failed". mysql_error());
 		return $result;
 	}
 
@@ -175,7 +175,7 @@ class mysql
 		{
 			$result[] = $row;
 		}
-		mysql_free_result($resource) or die("--Release Resource Failed". mysql_error().debug_print_backtrace()  );
+		mysql_free_result($resource) or $this->error("--Release Resource Failed". mysql_error()  );
 		return $result;
 	}
 
@@ -215,7 +215,7 @@ class mysql
 		{
 			$result[] = $row;
 		}
-		mysql_free_result($resource) or die("--Release Resource Failed". mysql_error().debug_print_backtrace()  );
+		mysql_free_result($resource) or $this->error("--Release Resource Failed". mysql_error() );
 		return $result;
 	}
 	public function getObject($sql)
@@ -234,7 +234,7 @@ class mysql
 	public function close()
 	{
 		if($this->link){
-			mysql_close($this->link) or die("--Close Database Link Error". mysql_error().debug_print_backtrace()  );
+			mysql_close($this->link) or $this->error("--Close Database Link Error". mysql_error());
 			$this->link=false;
 		}
 	}
@@ -404,10 +404,6 @@ class mysql
 	
 	
 	
-	
-	
-	
-	
 	/**
 	 * 数据库删除函数
 	 *
@@ -432,6 +428,19 @@ class mysql
 			$this->close();
 		}
 	}
+	private function error($string)
+    {
+        $t = "";
+        $trace = debug_backtrace();
+        if(!empty($trace)){
+            foreach($trace as $v){
+                $args = json_encode($v['args']);
+                $t .= "{$v['file']}({$v['line']})->{$v['function']}->[$args]\r\n";
+            }
+        }
+        $string .= "\r\n{$t}";
+        throw new exception(($string));
+    }
 
 }
 
