@@ -44,7 +44,7 @@ class mysqlii
 			return true;
 		}else{
 			//创建数据库连接ID
-			$this -> link = mysqli_connect($this->host,$this->user,$this->password,$this->db_name,$this->port) or die("--Can't connect Mysql!".mysqli_connect_error() . debug_print_backtrace() );
+			$this -> link = mysqli_connect($this->host,$this->user,$this->password,$this->db_name,$this->port) or $this->error("--Can't connect Mysql!".mysqli_connect_error());
 			//选择需要使用的数据库
 			//设置数据库字符集
 			mysqli_set_charset ($this->link , $this->charset );
@@ -88,7 +88,7 @@ class mysqlii
 		$start_time = time()+microtime();
 			
 		$this->connectDb();
-		$resource	= mysqli_query($this->link,$sql) or die("--Query Language Error:{$sql}". mysqli_error($this->link).debug_print_backtrace() );
+		$resource	= mysqli_query($this->link,$sql) or $this->error("--Query Language Error:{$sql}". mysqli_error($this->link).debug_print_backtrace() );
 			
 		$end_time	= time()+microtime();
 		$time		= strval($end_time-$start_time);
@@ -108,7 +108,7 @@ class mysqlii
 	{
 		$resource = $this->query($sql);
 		$numRows  = mysqli_num_rows($resource);
-		$this->mysqlii_free_result($resource) or die("--Release Resource Failed".mysqli_error($this->link).debug_print_backtrace() );
+		$this->mysqlii_free_result($resource) or $this->error("--Release Resource Failed".mysqli_error($this->link).debug_print_backtrace() );
 		return $numRows;
 	}
 
@@ -128,7 +128,7 @@ class mysqlii
 		{
 			$result=$row[0];
 		}
-		$this->mysqlii_free_result($resource) or die("--Release Resource Failed". mysqli_error($this->link).debug_print_backtrace() );
+		$this->mysqlii_free_result($resource) or $this->error("--Release Resource Failed". mysqli_error($this->link).debug_print_backtrace() );
 		return $result;
 	}
 
@@ -152,7 +152,7 @@ class mysqlii
 		{
 			$result[] = $row;
 		}
-		$this->mysqlii_free_result($resource) or die("--Release Resource Failed". mysqli_error($this->link).debug_print_backtrace()  );
+		$this->mysqlii_free_result($resource) or $this->error("--Release Resource Failed". mysqli_error($this->link).debug_print_backtrace()  );
 		return $result;
 	}
 
@@ -192,7 +192,7 @@ class mysqlii
 		{
 			$result[] = $row;
 		}
-		$this->mysqlii_free_result($resource) or die("--Release Resource Failed". mysqli_error($this->link).debug_print_backtrace()  );
+		$this->mysqlii_free_result($resource) or $this->error("--Release Resource Failed". mysqli_error($this->link).debug_print_backtrace()  );
 		return $result;
 	}
 	public function getObject($sql)
@@ -213,7 +213,7 @@ class mysqlii
 	public function close()
 	{
 		if($this->link){
-			mysqli_close($this->link) or die("--Close Database Link Error". mysqli_error($this->link).debug_print_backtrace()  );
+			mysqli_close($this->link) or $this->error("--Close Database Link Error". mysqli_error($this->link).debug_print_backtrace()  );
 			$this->link=false;
 		}
 	}
@@ -439,7 +439,7 @@ class mysqlii
 	 */
 	public function prepareExec($sql,$params_types,$array_bind_param)
 	{
-		if ($stmt =	mysqli_prepare($this->link,$sql) or die(mysqli_error($this->link)))
+		if ($stmt =	mysqli_prepare($this->link,$sql) or $this->error(mysqli_error($this->link)))
 		{
 			$length = strlen($params_types);//有几个绑定类型,肯定就有几个绑定变量
 			foreach ($array_bind_param as &$value){
@@ -460,7 +460,19 @@ class mysqlii
 		}
 
 	}
-
+	private function error($string)
+	{
+		$t = "";
+		$trace = debug_backtrace();
+		if(!empty($trace)){
+			foreach($trace as $v){
+				$args = json_encode($v['args']);
+				$t .= "{$v['file']}({$v['line']})->{$v['function']}->[$args]\r\n";
+			}
+		}
+		$string .= "\r\n{$t}";	
+		throw new exception(($string));
+	}
 }
 
 ?>

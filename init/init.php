@@ -9,10 +9,9 @@
 
 header('Content-Type:text/html;Charset=utf-8');
 header('Cache-Control:no-Cache');
-if(!defined('_ROOT'))
-{
-	define('_ROOT',dirname(dirname(__FILE__)).'/');
-}
+
+define('_ROOT',dirname(dirname(__FILE__)).'/');
+
 
 ini_set('magic_quotes_sybase','Off');		//由于smarty的问题,因此这里必须得关闭.否则会出问题,新版本已经解决
 ini_set('magic_quotes_runtime','Off');

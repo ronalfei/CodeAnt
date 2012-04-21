@@ -28,7 +28,7 @@ class controller
 			return $autoGet; 
 		}else{
 			$var_name = addslashes($var_name);
-			die("你访问的变量{$var_name}不存在");
+			throw new exception("你访问的变量{$var_name}不存在");
 		}
 		
 	}
