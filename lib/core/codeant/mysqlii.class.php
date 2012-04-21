@@ -471,7 +471,7 @@ class mysqlii
 			}
 		}
 		$string .= "\r\n{$t}";	
-		throw new exception(($string));
+		throw new cexception(($string));
 	}
 }
 

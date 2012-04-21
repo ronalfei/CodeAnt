@@ -30,6 +30,7 @@ class codeant
 	public function __construct()
 	{
 		require_once(_CORE_ROOT.'codeant/factory.class.php');
+		require_once(_CORE_ROOT.'codeant/cexception.class.php');
 		$this->benchmark	= factory::createBenchmarkObject();
 		$this->db			= factory::createDbObject();
 		$this->tpl			= factory::createTplObject($this->benchmark);
@@ -48,7 +49,6 @@ class codeant
 		{
 			ini_set('display_errors',0);
 			error_reporting(E_ALL^E_NOTICE);
-			//error_reporting(E_ALL);
 			$this->debug		= factory::createNoDebugObject();
 		}
 		else
@@ -100,14 +100,14 @@ class codeant
 		if(file_exists($controller_file_path)){
 			include_once($controller_file_path);
 		}else{
-			throw new Exception("控制器{$controller}.class.php不存在");
+			throw new cexception("控制器{$controller}.class.php不存在");
 		}
 		$_controller = "controller_{$controller}";					//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
 		$_action = "action_{$action}";								//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
 		if(class_exists($_controller)){
 			$object = new $_controller();
 		}else{
-			throw new Exception("控制器:{$controller}不存在");
+			throw new cexception("控制器:{$controller}不存在");
 		}
 		if(method_exists($object, $_action)){
 			$this->setController($controller);
@@ -118,7 +118,7 @@ class codeant
 			$this->log->warning('warning');
 			call_user_func_array(array($object,$_action), $params);
 		}else{
-			throw new Exception ("该控制器:{$controller}的方法:{$action}不存在");
+			throw new cexception ("该控制器:{$controller}的方法:{$action}不存在");
 		}
 		
 	}
