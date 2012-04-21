@@ -1,6 +1,6 @@
 <?php
 
-class memc
+class memcache
 {
 	private $handle=false;
 

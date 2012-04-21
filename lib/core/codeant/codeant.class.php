@@ -20,7 +20,7 @@ class codeant
 	public $db			= "";
 	public $tpl			= "";
 	public $input		= "";
-	public $memc		= "";
+	public $memcache	= "";
 	public $debug		= "";
 	public $log			= "";
 
@@ -37,7 +37,7 @@ class codeant
 		$this->input		= factory::createInputObject();
 		$this->log			= factory::createLogger();
 		if(_MEMCACHE_ENABLE){
-			$this->memc			= factory::createMemcacheObject();
+			$this->memcache	= factory::createMemcacheObject();
 		}
 		if(_DEBUG==='Y')
 		{

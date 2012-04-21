@@ -73,9 +73,9 @@ class factory
 	
 	static public function & createMemcacheObject()
 	{
-		require_once(_CORE_ROOT.'codeant/memc.class.php');
-		$memc = new memc();
-		return $memc;
+		require_once(_CORE_ROOT.'codeant/memcache.class.php');
+		$memcache = new memcache();
+		return $memcache;
 	}
 	static public function & createLogger()
 	{
