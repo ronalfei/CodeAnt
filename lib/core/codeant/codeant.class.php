@@ -36,6 +36,7 @@ class codeant
 		$this->tpl			= factory::createTplObject($this->benchmark);
 		$this->input		= factory::createInputObject();
 		$this->log			= factory::createLogger();
+		factory::createUtil();
 		if(_MEMCACHE_ENABLE){
 			$this->memcache	= factory::createMemcacheObject();
 		}
