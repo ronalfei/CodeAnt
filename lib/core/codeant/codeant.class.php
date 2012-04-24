@@ -102,8 +102,8 @@ class codeant
 		}else{
 			throw new cexception("控制器{$controller}.class.php不存在");
 		}
-		$_controller = "controller_{$controller}";					//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
-		$_action = "action_{$action}";								//控制器里面的方法必须以"_" 开头, 用来避开某些方法与关键字的冲突
+		$_controller = "controller_{$controller}";					//控制器里面的方法必须以"controller_" 开头, 用来避开某些方法与关键字的冲突
+		$_action = "action_{$action}";								//控制器里面的方法必须以"action_" 开头, 用来避开某些方法与关键字的冲突
 		if(class_exists($_controller)){
 			$object = new $_controller();
 		}else{
@@ -112,6 +112,7 @@ class codeant
 		if(method_exists($object, $_action)){
 			$this->setController($controller);
 			$this->setMethod($action);
+			$this->log->info("access");
 			call_user_func_array(array($object,$_action), $params);
 		}else{
 			throw new cexception ("该控制器:{$controller}的方法:{$action}不存在");
