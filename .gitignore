@@ -1,4 +1,5 @@
 *.log
+*.bak
 *.html.php
 *.htm.php
 *.js
