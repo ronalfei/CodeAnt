@@ -18,17 +18,21 @@ ini_set('magic_quotes_runtime', 'Off');
 ini_set('cgi.fix_pathinfo', 0);
 date_default_timezone_set('PRC');
 
+//-------load config file here--------------
 //require_once(_ROOT.'config/config.php');
 require_once(_ROOT.'config/core.config.php');
 require_once(_ROOT.'config/app.config.php');
 require_once(_ROOT.'config/db.config.php');
 require_once(_ROOT.'config/memcache.config.php');
 require_once(_ROOT.'config/smarty.config.php');
+require_once(_ROOT.'config/custom.config.php');
+//-------------------------------------------
 
 require_once(_SMARTY_ROOT.'Smarty.class.php');
 require_once(_CORE_ROOT.'codeant/codeant.class.php');
 require_once(_CORE_ROOT.'codeant/controller.class.php');
 require_once(_CORE_ROOT.'codeant/module.class.php');
+
 if(_USE_FIRE_PHP){
 	require_once(_PLUGIN_ROOT.'FirePHPCore/fb.php');
 	//ob_start();			//you can start this firePHP
