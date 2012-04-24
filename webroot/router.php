@@ -1,7 +1,6 @@
 <?php
 include_once("../init/init.php");
 
-
 try{
 	$codeAnt->run();
 }catch(Exception $e){
