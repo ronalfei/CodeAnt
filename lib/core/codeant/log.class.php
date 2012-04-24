@@ -22,13 +22,16 @@ class log
 
 	private function WriteToFile($level, $term)
 	{
+		$trace = debug_backtrace();
+		$filename = $trace[1]['file'];
+		$line = $trace[1]['line'];
 		$term = $this->switchTerm($term);
 		$date = date("Y.m.d");
 		$file_path = _OPTION_PATH.'codeAnt.'.$date.'.log';
 		$ip = $this->getUserIp();
 		$agent = $this->getUserBroswer();
 		$datetime = date("Y-m-d H:i:s");
-		$prefix = "[$level] [{$ip}] [{$agent}] [{$datetime}] {$_SERVER['REQUEST_URI']}:";
+		$prefix = "[{$datetime}] [{$ip}] [{$agent}] [$level] {$_SERVER['REQUEST_URI']}({$filename}{$line}):";
 		$data = $prefix.$term."\r\n";
 		file_put_contents($file_path, $data, FILE_APPEND);
 	}

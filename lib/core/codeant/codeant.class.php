@@ -112,10 +112,6 @@ class codeant
 		if(method_exists($object, $_action)){
 			$this->setController($controller);
 			$this->setMethod($action);
-			$this->log->info('info');
-			$this->log->error('error');
-			$this->log->debug('debug');
-			$this->log->warning('warning');
 			call_user_func_array(array($object,$_action), $params);
 		}else{
 			throw new cexception ("该控制器:{$controller}的方法:{$action}不存在");
