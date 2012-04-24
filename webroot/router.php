@@ -1,7 +1,8 @@
 <?php
-include_once("../init/init.php");
+
 
 try{
+	include_once("../init/init.php");
 	$codeAnt->run();
 }catch(Exception $e){
 	$exception  = "<br/>\r\n----------exception throw:--------------<br/>\r\n";
@@ -18,5 +19,6 @@ try{
 	$exception = $se->getMessage();
 	$codeAnt->log->error($exception);
 }
+
 
 ?>

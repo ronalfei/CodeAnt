@@ -31,12 +31,14 @@ class codeant
 	{
 		require_once(_CORE_ROOT.'codeant/factory.class.php');
 		require_once(_CORE_ROOT.'codeant/cexception.class.php');
+		require_once(_CORE_ROOT.'codeant/error.class.php');
 		$this->benchmark	= factory::createBenchmarkObject();
 		$this->db			= factory::createDbObject();
 		$this->tpl			= factory::createTplObject($this->benchmark);
 		$this->input		= factory::createInputObject();
 		$this->log			= factory::createLogger();
 		factory::createUtil();
+		//set_error_handler("error::codeant_handler");
 		if(_MEMCACHE_ENABLE){
 			$this->memcache	= factory::createMemcacheObject();
 		}
