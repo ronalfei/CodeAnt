@@ -15,20 +15,20 @@ class input
 	 * @param int $type(1-数字;2-字符;3-数组或其他)
 	 * @return result
 	 */
-	public function get($key,$type='')
+	public function get($key,$type=2)
 	{
 		$key = self::trim($key);
 		$value = isset($_GET[$key])?$_GET[$key]:0;
 		return $this->filter($value,$type);
 	}
 	
-	public function post($key,$type='')
+	public function post($key,$type=2)
 	{
 		$key = self::trim($key);
 		$value = isset($_POST[$key])?$_POST[$key]:0;
 		return $this->filter($value,$type);
 	}
-	public function request($key,$type='')
+	public function request($key,$type=2)
 	{
 		$key = self::trim($key);
 		$value = isset($_POST[$key])?$_POST[$key]:FALSE;
@@ -40,7 +40,7 @@ class input
 		}
 		return $this->filter($value,$type);
 	}
-	public function string($type='')
+	public function string($type=2)
 	{
 		$key = self::trim($key);
 		$value = isset($_SERVER['QUERY_STRING'])?$_SERVER['QUERY_STRING']:0;
