@@ -8,6 +8,7 @@ define('_SMARTY_CACHEING',FALSE);									//是否启用缓存(动态站点建�
 define('_SMARTY_TEMPLATE_DIR',_TPL_ROOT); 							//模版存放路径
 define('_SMARTY_COMPILE_DIR',_VAR_ROOT.'templates_c/');				//模版编译路径,单独提出方便清理
 define('_SMARTY_CONFIG_DIR',_SMARTY_ROOT.'config/');				//模版config路径
+define('_SMARTY_CACHE_DIR',_VAR_ROOT.'cache/');						//模版config路径
 define('_SMARTY_LEFT_DELIMITER','{{');								//smarty脚本起始符
 define('_SMARTY_RIGHT_DELIMITER','}}');								//smarty脚本结束符
 

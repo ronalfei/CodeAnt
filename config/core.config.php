@@ -1,9 +1,5 @@
 <?php
 
-//system config
-define('_SYS_NAME', "CodeAnt FrameWork");
-define('_SYS_VERSION', "2.0");
-
 //webdomain config
 define('_WEB_DOMAIN','/');
 define('_CSS_URL', '/themes/default/css/');

@@ -83,7 +83,7 @@ class factory
 		$logger = new log();
 		return $logger;
 	}
-	static public function & createUtil()
+	static public function createUtil()
 	{
 		require_once(_CORE_ROOT.'codeant/util.class.php');
 	}
