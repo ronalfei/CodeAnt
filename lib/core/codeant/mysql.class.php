@@ -326,7 +326,7 @@ class mysql
 			return ' where 1 ';
 		}
 		foreach($params as $key=>$value){
-			if(empty($value)){
+			if(empty($value) && $value!==0){
 				continue;
 			}else{
 				if(strpos($key,'+')===false){
