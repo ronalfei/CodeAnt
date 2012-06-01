@@ -1,13 +1,13 @@
 <?php
 class util
 {
-	public function getUserIp()
+	public static function getUserIp()
 	{
 		$ip = $_SERVER['REMOTE_ADDR'];
 		return $ip;
 	}
 	
-	public function getUserBroswer()
+	public static function getUserBroswer()
 	{
 		$agent = $_SERVER['HTTP_USER_AGENT'];
 		if (preg_match('/Firefox/i', $agent)) {

@@ -44,6 +44,7 @@ $codeAnt->benchmark->mark('total_execute_time_start');
 
 spl_autoload_register('codeAntAutoLoad');
 
+
 function codeAntAutoLoad($className)
 {
     $file_path = "";
@@ -72,4 +73,18 @@ function codeAntAutoLoad($className)
     }
 
 }
+
+register_shutdown_function("catch_fatal_error");
+
+function catch_fatal_error()
+{
+	global $codeAnt;
+	$error = error_get_last();
+	if(!empty($error)){
+		$tmp = var_export($error, true);
+		$codeAnt->log->error($tmp);
+	}
+}
+
+
 ?>
