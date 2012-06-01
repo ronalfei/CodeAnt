@@ -16,3 +16,4 @@ frame.class.php
 user.class.php
 app/module/gift.class.php
 app/module/user.class.php
+webroot/t.php
