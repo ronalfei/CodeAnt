@@ -83,7 +83,7 @@ class mysqlii
 	 * @param string $sql
 	 * @return resource
 	 */
-	private function query($sql)
+	public function query($sql)
 	{
 		$start_time = time()+microtime();
 			
@@ -255,12 +255,7 @@ class mysqlii
 	 */
 	public function getInsertId()
 	{
-		$sql	=	"select last_insert_id()";
-		$lastId	=	$this->fetchOne($sql);
-		if(empty($lastId)){
-			$lastId = 0;
-		}
-		return $lastId;
+		return mysqli_insert_id($this->link);
 	}
 
 
@@ -472,6 +467,29 @@ class mysqlii
 		}
 		$string .= "\r\n{$t}";	
 		throw new cexception(($string));
+	}
+	
+	public function beginTransaction()
+	{
+		$this->disableAutoCommit();
+	}
+	public function commit()
+	{
+		mysqli_commit($this->link);
+		$this->enableAutoCommit();
+	}
+	public function rollback()
+	{
+		mysqli_rollback($this->link);
+		$this->enableAutoCommit();
+	}
+	public function enableAutoCommit()
+	{
+		mysqli_autocommit($this->link, TRUE);
+	}
+	public function disableAutoCommit()
+	{
+		mysqli_autocommit($this->link, FALSE);
 	}
 }
 
