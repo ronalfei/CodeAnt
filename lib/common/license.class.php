@@ -143,7 +143,7 @@ class license
 	{
 		$licenseArray = $this->decodeLicenseKey();
 		$mac = $this->getEthMac();
-		if($licenseArray['mac_addr'])==$mac){
+		if($licenseArray['mac_addr']==$mac){
 			return true;
 		}else{
 			return false;

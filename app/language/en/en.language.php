@@ -2,8 +2,7 @@
 //language config here:
 
 Array(
-	'SYSTEM_NAME'=>'System Name';
-
+	'SYSTEM_NAME'=>'System Name',
 );
 
 ?>

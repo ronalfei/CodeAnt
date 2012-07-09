@@ -2,7 +2,7 @@
 //language config here:
 
 Array(
-	'SYSTEM_NAME'=>'系统名称';
+	'SYSTEM_NAME'=>'系统名�,
 );
 
 ?>

@@ -37,7 +37,7 @@
 	);
 	
 	
-	$codeAnt->db->prepar Exec($sql,'sisss',$arr);
+	$codeAnt->db->preparExec($sql,'sisss',$arr);
 	
 	$codeAnt->debug->displayProfile();
 ?>
