@@ -99,11 +99,11 @@ class codeant
 		    $params = array_slice($uri, 2);
 		}
 
-		$controller_file_path  = _CONTROLLER_ROOT."{$controller}.class.php";
+		$controller_file_path  = _CONTROLLER_ROOT."{$controller}.controller.php";
 		if(file_exists($controller_file_path)){
 			include_once($controller_file_path);
 		}else{
-			throw new cexception("控制器{$controller}.class.php不存在");
+			throw new cexception("控制器{$controller}.controller.php不存在");
 		}
 		$_controller = "controller_{$controller}";					//控制器里面的方法必须以"controller_" 开头, 用来避开某些方法与关键字的冲突
 		$_action = "action_{$action}";								//控制器里面的方法必须以"action_" 开头, 用来避开某些方法与关键字的冲突
