@@ -52,11 +52,14 @@ function codeAntAutoLoad($className)
     if(count($temp) > 1){
         switch($temp[0]){
             case 'controller':
-                $file_path = _CONTROLLER_ROOT."{$temp[1]}.class.php";
+                $file_path = _CONTROLLER_ROOT."{$temp[1]}.controller.php";
             break;
             case 'module':
-                $file_path = _MODULE_ROOT."{$temp[1]}.class.php";
+                $file_path = _MODULE_ROOT."{$temp[1]}.module.php";
             break;
+			case '':
+				$file_path = _HELP_ROOT."{$temp[1]}.help.php";
+			break;
 
             default:
                 $file_path = _CLASS_ROOT."{$className}.class.php";
