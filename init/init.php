@@ -63,7 +63,7 @@ function codeAntAutoLoad($className)
 			break;
 
             default:
-                $file_path = _CLASS_ROOT."{$className}.class.php";
+                $file_path = _CLASS_ROOT."{$temp[1]}.class.php";
             break;
         }
     }else{
