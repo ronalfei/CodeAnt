@@ -32,6 +32,7 @@ require_once(_SMARTY_ROOT.'Smarty.class.php');
 require_once(_CORE_ROOT.'codeant/codeant.class.php');
 require_once(_CORE_ROOT.'codeant/controller.class.php');
 require_once(_CORE_ROOT.'codeant/module.class.php');
+require_once(_CORE_ROOT.'codeant/help.class.php');
 
 if(_USE_FIRE_PHP){
 	require_once(_PLUGIN_ROOT.'FirePHPCore/fb.php');
