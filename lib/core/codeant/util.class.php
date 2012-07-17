@@ -60,6 +60,39 @@ class util
 		  return  'firefox';
 		}
 	}
+	/**
+	 * 根据时间戳创建一个不会重复18位UUID
+	 * Enter description here ...
+	 */
+	public static function createUuId()
+	{
+		
+		$time = microtime();
+		$tmp = explode(" ", $time);
+		$milTime = $tmp[1].$tmp[0]*1000000;
+		$rand = self::rand2();
+		return $milTime.$rand;
+	}
+	
+	private static function rand2()
+	{
+		global $codeAnt;
+		$key = 'ca_uuid_random_int';
+		if(_MEMCACHE_ENABLE){
+			$number = $codeAnt->memcache->increment($key,1);
+			$number = intval($number);
+			if(empty($number)){
+				$number = 10;
+				$codeAnt->memcache->set($key, $number);
+			}
+			if($number>85){
+				$codeAnt->memcache->set($key, 10);
+			}
+			$rand = $number;
+		}else{
+			$rand = rand(10, 99);
+		}
+	}
 
 }
 ?>
