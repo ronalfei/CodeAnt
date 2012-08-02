@@ -114,6 +114,13 @@ class memc
 		}
 	}
 
+	function increment($key, $value)
+    {
+        $this->connect();
+        return $this->handle->increment($key, $value);
+    }
+
+
 	/**
 	 * remove value from cache
 	 *

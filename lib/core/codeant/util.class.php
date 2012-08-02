@@ -1,7 +1,7 @@
 <?php
 class util
 {
-	public static function getUserIp()
+	public static function getUserIp( $offset=0 )
 	{
 		$onlineip = '';
 		if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
@@ -92,6 +92,7 @@ class util
 		}else{
 			$rand = rand(10, 99);
 		}
+		return $rand;
 	}
 
 }
