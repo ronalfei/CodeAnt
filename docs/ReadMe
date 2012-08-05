@@ -1,4 +1,88 @@
 //codeant这个对象提供了几个实例,
 //其中有:
-//db(数据库对象,可以调用的方法参见docs下的db.txt
-//tpl(模板对象,及smarty对象的一个引用,具体方法可以参见smarty手册
+//db(数据库对象)
+在module或者controller里可以通过$this->codeant->db来进行调用
+有如下几个常用方法:
+1.getAll($sql) --- 返回一个2维的数组
+2.getOne($sql) --- 返回第一行的第一个值.
+3.getRow($sql) --- 返回第一行的值,是已给一维数组
+4.compileSetSql($Array(column=>value)) --- 返回sql语句的set段,如: set column='value'
+5.compileWhereSql($Array(column=>value)) --- 返回sql语句的where段,如: where column=value
+注意:要是Array里的value值为空, 可能该字段会被跳过,如果所有字段都为空,或者数组为空,
+		 会生成 where 1 类型,此种情况要注意, 特别是对于update语句的时候,可能会变成灾难.
+6.getResource($sql) ---- 如果需要mysql直接返回resource结果, 可以调用此函数
+7.autoInsert(tablename, $Array(values)) ---自动拼接sql语句并执行插入.
+8.autoUpdate($tableName,$setParams,$whereParams) --- 自动拼接sql并执行更新.
+9.select($tableName,$field=array(),$where=array(),$order='',$sort='',$start=0,$limit=0)
+10.prepareExec($sql,$params_types,$array_bind_param)--可以参见 exampleForMysqli.php
+11.beginTransaction()
+12.commit()
+13.rollback()
+		 
+//tpl(模板对象,及smarty对象的一个引用,具体方法可以参见smarty手册)
+通过$this->codeant->tpl->smarty->来调用,所有smart的方法都可以使用
+tpl本身有:
+1.assign_by_ref(tplvar, phpvar)
+2.display(tplname)
+3.fetch(tplname)
+
+为了使用方便,codeant本身也加载了几个tpl方法到自己身上.
+1.display() ----主要在controller中调用, 会自动寻找template里的同controller和action对应名字的模板
+2.debug() ---- 显示出调试信息
+
+
+benchmark类
+通过$this->codeAnt->benchmark->mark('total_execute_time_start');开始调用
+通过$codeAnt->benchmark->mark('total_execute_time_end');结束调用
+然后通过$this->codeant->debug()可以自动在页脚打印出你想调试的信息.
+
+log类
+显性打印出日志
+可以通过log::info(string)|log::waring(sting)|log::error(string)|log::debug(string)来调试信息
+debug是最低级别的日志打印, 可以通过配置文件来进行配置.
+
+input类:
+主要方法有:
+$this->codeant->input->post(key, type); 获取$_POST过来的参数
+$this->codeant->input->get(key, type); 获取$_GET过来的参数
+$this->codeant->input->request(key, type); 获取$_REQUEST过来的参数
+type为:1-数字,2-字符串 3-数组, 不填写, 默认为2-字符串的方式进行过滤
+
+
+
+memcache类
+主要就是
+$this->codeant->memcache->get(key);
+$this->codeant->memcache->set(key, value, compress=0,expire=0); 后两个参数为 压缩比和过期时间(秒)
+$this->codeant->memcache->del(key);/$this->codeant->delete(key);
+
+util类
+比较常用的工具类.
+目前有:
+ util::getUserBroswer()
+ util::getUserIp
+ 
+ 
+框架中想调用自己写的class, 只需要文件名对应类名, 且放置到lib/common目录下即可
+通过new操作符来生成这个类的实例, 或者直接class::method来进行静态调用.
+ 
+lib/common与help里的文件区别. help是对于项目来说,是比较有针对性的.
+而common下是任何项目都可以通用的.help目录下的文件规范具体看help下的readme
+ 
+ 开发规范简要:
+ 1.每个函数开头的注释要清楚,主要要写清楚,参数类型,以及返回值类型
+ 2.在编写module的时候, 要把通用的部分尽可能的抽出来.
+ 3.module类中不可以直接返回数据给客户端(浏览器), 所有的response需要从controller中返回.
+ 4.一个函数尽可能不要超过一屏幕
+ 5.函数的第一个大括号另起一行, if等的第一个大括号可以紧跟在后面
+ 6.函数命名尽可能的规范, 不怕名字长,就怕不清楚
+ 7.sql语句体,不要直接代入函数中, 通过赋值一个变量来代入.
+ 
+ 注意事项:
+ 1.留意compilewheresql在update语句中的陷阱.
+ 2.注意input类的参数过滤问题, 避免sql注入和xss注入
+ 3.log调试日志要合理, 为了调试的尽量用debug, 日志级别在生产环境上是info级别.测试环境是debug级别.
+ 4.默认的benchmark类可以看到每个sql语句执行的时间, 以及模板解析的时间.
+ 
+
+

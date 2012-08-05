@@ -4,6 +4,7 @@ class log
 	static private $level = Array('debug'=>1, 'info'=>2, 'warning'=>3, 'error'=>4);
 
 
+<<<<<<< HEAD
 	static public function debug($term, $display=false)
 	{
 		self::is_this_level(1)?self::WriteToFile('DEBUG', $term, $display):"";
@@ -22,6 +23,26 @@ class log
 	}
 
 	static private function WriteToFile($level, $term, $display)
+=======
+	static public function debug($term)
+	{
+		self::is_this_level(1)?self::WriteToFile('DEBUG', $term):"";
+	}
+	static public function info($term)
+	{
+		self::is_this_level(2)?self::WriteToFile('INFO', $term):"";
+	}
+	static public function warning($term)
+	{
+		self::is_this_level(3)?self::WriteToFile('WARNING', $term):"";
+	}
+	static public function error($term)
+	{
+		self::is_this_level(4)?self::WriteToFile('ERROR', $term):"";
+	}
+
+	static private function WriteToFile($level, $term)
+>>>>>>> 3416cbce24e86b13d54425300cb37ad5fe98b781
 	{
 		$trace = debug_backtrace();
 		$filename = $trace[1]['file'];
@@ -49,11 +70,14 @@ class log
 		}
 	}
 	
+<<<<<<< HEAD
 	static private function output($data)
 	{
 		echo $data, "</br>";
 	}
 	
+=======
+>>>>>>> 3416cbce24e86b13d54425300cb37ad5fe98b781
 	static private function switchTerm($term)
 	{
 		$type = strtolower(gettype($term));
