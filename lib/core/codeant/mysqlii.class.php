@@ -239,8 +239,8 @@ class mysqlii
 	{
 		if($this->query($sql))
 		{
-			//return true;
-			return $this->getInsertId();
+			return true;
+			//return $this->getInsertId();
 		}
 		else
 		{
@@ -266,6 +266,7 @@ class mysqlii
 			if(!isset($value)||$value===''){
 				continue;
 			}else{
+				$key = trim($key);
 				if(trim($value)=='now()'){
 					$str .= ",`$key`={$value} ";
 				}else{
@@ -288,6 +289,13 @@ class mysqlii
 		$sql = "insert into `$tableName` ".$set ;
 		return $this->insert($sql);
 	}
+
+	public function autoReplace($tableName, $params)
+	{
+		$set = $this->compileSetValue($params);
+		$sql = "replace into `$tableName` ".$set;
+		return $this->insert($sql);
+	}
 	
 	public function autoUpdate($tableName,$setParams,$whereParams)
 	{
@@ -307,6 +315,7 @@ class mysqlii
 			if(empty($value) && $value!==0){
 				continue;
 			}else{
+				$key = trim($key);
 				if(strpos($key,'+')===false){
 					//查看是否键值中包含".",如a.username之类的key
 					if(strpos($key, '.')>0){
@@ -471,12 +480,19 @@ class mysqlii
 	
 	public function beginTransaction()
 	{
+		$this->query("select version()");
 		$this->disableAutoCommit();
 	}
 	public function commit()
 	{
-		mysqli_commit($this->link);
-		$this->enableAutoCommit();
+		if(mysqli_commit($this->link)==true){
+			$this->enableAutoCommit();
+			return true;
+		}else{
+			$this->rollback();
+			$this->enableAutoCommit();
+			return false;
+		}
 	}
 	public function rollback()
 	{
