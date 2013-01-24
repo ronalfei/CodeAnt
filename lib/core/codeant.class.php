@@ -29,9 +29,9 @@ class codeant
 
 	public function __construct()
 	{
-		require_once(_CORE_ROOT.'codeant/factory.class.php');
-		require_once(_CORE_ROOT.'codeant/cexception.class.php');
-		//require_once(_CORE_ROOT.'codeant/error.class.php');
+		require_once(_CORE_ROOT.'factory.class.php');
+		require_once(_CORE_ROOT.'cexception.class.php');
+		//require_once(_CORE_ROOT.'error.class.php');
 		$this->benchmark	= factory::createBenchmarkObject();
 		$this->db			= factory::createDbObject();
 		$this->tpl			= factory::createTplObject($this->benchmark);
