@@ -27,8 +27,8 @@ define('_CLASS_ROOT', _LIB_ROOT.'common/');
 define('_DEBUG', 'Y');										//是否调试模式,必须是(Y,N)之一,调试模式下显示错误在页面上
 define('_SQL_DEBUG', 'Y');									//是否在后台记录sql日志(Y-记录;N-不记录)
 define('_SQL_PATH', _VAR_ROOT.'logs/sql/');					//sql日志的目录
-define('_OPTION_PATH', _VAR_ROOT.'logs/option/');			//sql日志的目录
-define('_OPTION_LOG_LEVEL', 'DEBUG');						//DEBUG > INFO > WARNING >  ERROR
+define('_ACCESS_LOG_PATH', _VAR_ROOT.'logs/access/');			//sql日志的目录
+define('_ACCESS_LOG_LEVEL', 'DEBUG');						//DEBUG > INFO > WARNING >  ERROR
 //************************************
 
 //custom plugin config
