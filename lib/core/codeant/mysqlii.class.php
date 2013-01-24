@@ -267,7 +267,7 @@ class mysqlii
 				continue;
 			}else{
 				$key = trim($key);
-				if(trim($value)=='now()'){
+				if(strtolower(trim($value))=='now()'){
 					$str .= ",`$key`={$value} ";
 				}else{
 					$str .= ",`$key`='{$value}' ";
@@ -326,7 +326,7 @@ class mysqlii
 					
 				}else{
 					$symbol	= explode('+',$key);
-					if(trim($value)=='now()'||$symbol[1]=='between'||$symbol[1]=='in'){
+					if(strtolower(trim($value))=='now()'||$symbol[1]=='between'||$symbol[1]=='in'){
 						if(strpos($symbol[0], ')')>0 ){
 							$str[]	= " {$symbol[0]} {$symbol[1]} {$value} ";
 						}else{
