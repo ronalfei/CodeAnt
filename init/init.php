@@ -29,10 +29,10 @@ require_once(_ROOT.'config/custom.config.php');
 //-------------------------------------------
 
 require_once(_SMARTY_ROOT.'Smarty.class.php');
-require_once(_CORE_ROOT.'codeant/codeant.class.php');
-require_once(_CORE_ROOT.'codeant/controller.class.php');
-require_once(_CORE_ROOT.'codeant/module.class.php');
-require_once(_CORE_ROOT.'codeant/help.class.php');
+require_once(_CORE_ROOT.'codeant.class.php');
+require_once(_CORE_ROOT.'controller.class.php');
+require_once(_CORE_ROOT.'module.class.php');
+require_once(_CORE_ROOT.'help.class.php');
 
 if(_USE_FIRE_PHP){
 	require_once(_PLUGIN_ROOT.'FirePHPCore/fb.php');
