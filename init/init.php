@@ -58,7 +58,7 @@ function codeAntAutoLoad($className)
             case 'module':
                 $file_path = _MODULE_ROOT."{$temp[1]}.module.php";
             break;
-			case '':
+			case 'help':
 				$file_path = _HELP_ROOT."{$temp[1]}.help.php";
 			break;
 
