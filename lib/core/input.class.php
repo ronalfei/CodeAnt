@@ -50,6 +50,11 @@ class input
 	{
 		return $_SERVER['DOCUMENT_URI'];
 	}
+	public function method()
+	{
+		return strtoupper($_SERVER['REQUEST_METHOD']);
+	}
+
 	private function filter($value,$type)
 	{
 		switch($type){
