@@ -40,9 +40,9 @@ class page
 		$this -> fileName		= $_SERVER['SCRIPT_FILENAME'];		//文件绝对路径
 		$this -> total			= $total;
 		$this -> pageNum		= $pageNum;
-		$this -> url			= $this->scriptName;				//对url的赋值必须放到后面
 		$this -> requestUrl		= $_SERVER['REQUEST_URI'];			//获取上次请求的URL
-			
+		$this -> setUrl();
+
 		$this -> parseRequestUrl();
 		$this -> setTotalPage();
 		$this -> judgePageNum();
@@ -51,6 +51,12 @@ class page
 		$this -> setLimitSql();
 		$this -> previousPageUrl();
 		$this -> nextPageUrl();
+	}
+
+	private function setUrl()
+	{
+		$url_info = parse_url($_SERVER['REQUEST_URI']);
+		$this->url = $url_info['path'];
 	}
 
 
@@ -174,7 +180,7 @@ class page
 	 * 并根据该数组打印出form表单中的隐藏表单
 	 * @return 隐藏表单字符串
 	 */
-	private function printCondition()
+	private function getCondition()
 	{
 		$conArr = array();
 		$temp   = "";
@@ -290,7 +296,7 @@ class page
 		{
 			$temp[] = "<div align='right' class='$div' style='padding-right:20px'>";
 			$temp[] = "<form name='pagination' action='$this->url' method='GET'>";
-			$temp[] = $this->printCondition();					//打印出隐藏表单
+			$temp[] = $this->getCondition();					//打印出隐藏表单
 			$temp[] = "共有 -<font color='red'><b>$this->total</b></font>- 条记录 ";
 			$temp[] = " 共 -<font color='red'><b>$this->totalPage</b></font>- 页 ";
 			
