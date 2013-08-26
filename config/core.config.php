@@ -15,6 +15,8 @@ define('_VAR_ROOT', _ROOT.'var/');
 
 //Lib root config
 define('_LIB_ROOT', _ROOT.'lib/');
+//config root 
+define('_CONFIG_ROOT', _ROOT.'config/');
 //core root config
 define('_CORE_ROOT', _LIB_ROOT.'core/');
 //plugin root config

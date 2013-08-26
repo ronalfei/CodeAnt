@@ -32,6 +32,7 @@ require_once(_SMARTY_ROOT.'Smarty.class.php');
 require_once(_CORE_ROOT.'codeant.class.php');
 require_once(_CORE_ROOT.'controller.class.php');
 require_once(_CORE_ROOT.'module.class.php');
+require_once(_CORE_ROOT.'dao.class.php');
 require_once(_CORE_ROOT.'help.class.php');
 
 if(_USE_FIRE_PHP){
@@ -46,28 +47,38 @@ $codeAnt->benchmark->mark('total_execute_time_start');
 spl_autoload_register('codeAntAutoLoad');
 
 
-function codeAntAutoLoad($className)
+function codeAntAutoLoad($class_name)
 {
     $file_path = "";
-    $temp   = explode('_',$className);
-    if(count($temp) > 1){
-        switch($temp[0]){
+    $pos = strpos($class_name, '_');
+
+
+    if($pos !== false){
+        $type = substr($class_name, 0 , $pos);
+        $prefix = substr($class_name, $pos+1);
+        //echo $type, '-----',$prefix, "----\r\n";
+        switch($type) {
             case 'controller':
-                $file_path = _CONTROLLER_ROOT."{$temp[1]}.controller.php";
+                $file_path = _CONTROLLER_ROOT."{$prefix}.controller.php";
             break;
             case 'module':
-                $file_path = _MODULE_ROOT."{$temp[1]}.module.php";
+                $file_path = _MODULE_ROOT."{$prefix}.module.php";
+            break;
+            case 'dao':
+                $file_path = _DAO_ROOT."{$prefix}.dao.php";
             break;
 			case 'help':
-				$file_path = _HELP_ROOT."{$temp[1]}.help.php";
+				$file_path = _HELP_ROOT."{$prefix}.help.php";
 			break;
+			case 'config':
+                $file_path = _CONFIG_ROOT."{$prefix}.config.php";
 
             default:
-                $file_path = _CLASS_ROOT."{$temp[1]}.class.php";
+                $file_path = _CLASS_ROOT."{$prefix}.class.php";
             break;
         }
     }else{
-        $file_path = _CLASS_ROOT."{$className}.class.php";
+        $file_path = _CLASS_ROOT."{$class_name}.class.php";
         //nothing todo
         //因为smarty3.0 也用到了autoload函数, 这里就不能显示错误了.
         //debug_print_backtrace();
@@ -82,11 +93,10 @@ register_shutdown_function("catch_fatal_error");
 
 function catch_fatal_error()
 {
-	global $codeAnt;
 	$error = error_get_last();
 	if(!empty($error)){
 		$tmp = var_export($error, true);
-		$codeAnt->log->error($tmp);
+		log::error($tmp);
 	}
 }
 
