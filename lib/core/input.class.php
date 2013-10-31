@@ -62,10 +62,18 @@ class input
 				return intval($value);
 				break;
 			case 2:
-				return self::trimXss(addslashes($value));
+                if(empty($value)){
+                    return "";
+                }else{
+				    return self::trimXss(addslashes($value));
+                }
 				break;
 			case 3:
-				return $value;
+                if(empty($value)){
+                    return Array();
+                }else{
+				    return $value;
+                }
 				break;
 			default:
 				return $value;
