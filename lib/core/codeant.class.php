@@ -130,8 +130,9 @@ class codeant
         json_response($code, $status, $data);
     }
 
-	public function json_response($code, $status, $data)
+	public function json_response($http_code, $status, $data)
 	{
+        $code = intval($http_code);
 		$response['result'] = $data;
 		$response['code'] = $code;
 		$response['status'] = $status;
@@ -140,13 +141,16 @@ class codeant
 		echo $response_json;
 	}
 
-	public function rest_response($code, $status, $data)
+	public function rest_response($http_code, $status, $data)
 	{
+        $code = intval($http_code);
 		$response['result'] = $data;
 		$response['status'] = $status;
+		$response['code'] = $code;
 		$response_json = json_encode($response);
+        http_response_code($code);
 		header('Content-Type:application/json; Charset=utf-8');
-        header("Status: {$code}");
+        //header("Status: {$code}");
 		echo $response_json;
 	}
 	
