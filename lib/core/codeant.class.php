@@ -70,14 +70,7 @@ class codeant
 		$this->tpl->display($tpl);
 		$this->debug();
 	}
-	public function response($data, $status)
-	{
-		$response['result'] = $data;
-		$response['status'] = $status;
-		$response_json = json_encode($response);
-		header('Content-Type:application/json; Charset=utf-8');
-		echo $response_json;
-	}
+
 	private function setController($controller)
 	{
 		$this->controller = $controller;
@@ -129,6 +122,32 @@ class codeant
 			throw new cexception ("该控制器:{$controller}的方法:{$action}不存在");
 		}
 		
+	}
+
+
+	public function response($code, $status, $data)
+	{
+        json_response($code, $status, $data);
+    }
+
+	public function json_response($code, $status, $data)
+	{
+		$response['result'] = $data;
+		$response['code'] = $code;
+		$response['status'] = $status;
+		$response_json = json_encode($response);
+		header('Content-Type:application/json; Charset=utf-8');
+		echo $response_json;
+	}
+
+	public function rest_response($code, $status, $data)
+	{
+		$response['result'] = $data;
+		$response['status'] = $status;
+		$response_json = json_encode($response);
+		header('Content-Type:application/json; Charset=utf-8');
+        header("Status: {$code}");
+		echo $response_json;
 	}
 	
 }
