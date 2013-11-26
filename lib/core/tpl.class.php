@@ -14,8 +14,8 @@ class tpl
 	public function __construct($benchmark)
 	{
 		$this->smarty =  new Smarty();
-		$this->benchmark = $benchmark;
 		$this->config();
+		$this->benchmark = $benchmark;
 	}
 
 	private function config()
@@ -139,9 +139,9 @@ class tpl
 	 * @param string $tplName
 	 * @return string 整个模板文件内容
 	 */
-	public function fetch($tplName,$cache_id=null,$compile_id=null)
+	public function fetch($tplName, $cache_id=null, $compile_id=null)
 	{
-		return $this->smarty->fetch($tplName,$cache_id=null,$compile_id=null,false);
+		return $this->smarty->fetch($tplName, $cache_id, $compile_id);
 	}
 
 	/**
