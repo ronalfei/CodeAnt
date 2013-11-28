@@ -72,7 +72,7 @@ function codeAntAutoLoad($class_name)
 			break;
 			case 'config':
                 $file_path = _CONFIG_ROOT."{$prefix}.config.php";
-
+            break;
             default:
                 $file_path = _CLASS_ROOT."{$prefix}.class.php";
             break;
