@@ -54,6 +54,11 @@ class util
 		  @header('Browser:IE9');
 		  return 'ie9';
 		}
+        elseif(preg_match('/curl/i',$agent))
+		{
+		  @header('Browser:Curl');
+		  return 'ie9';
+		}
 		else
 		{
 		  @header('Browser:else');
@@ -66,7 +71,6 @@ class util
 	 */
 	public static function createUuId()
 	{
-		
 		$time = microtime();
 		$tmp = explode(" ", $time);
 		$milTime = $tmp[1].$tmp[0]*1000000;
