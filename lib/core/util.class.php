@@ -24,7 +24,7 @@ class util
 	
 	public static function getUserBroswer()
 	{
-		$agent = $_SERVER['HTTP_USER_AGENT'];
+		$agent = empty($_SERVER['HTTP_USER_AGENT'])?'unkown':$_SERVER['HTTP_USER_AGENT'];
 		if (preg_match('/Firefox/i', $agent)) {
 		  @header('Browser:Firefox');
 		  return "firefox";
@@ -61,7 +61,7 @@ class util
 		}
 		else
 		{
-		  @header('Browser:else');
+		  @header('Browser:unkown');
 		  return  'firefox';
 		}
 	}
@@ -71,6 +71,7 @@ class util
 	 */
 	public static function createUuId()
 	{
+		
 		$time = microtime();
 		$tmp = explode(" ", $time);
 		$milTime = $tmp[1].$tmp[0]*1000000;
