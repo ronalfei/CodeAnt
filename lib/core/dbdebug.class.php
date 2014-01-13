@@ -17,8 +17,8 @@ class dbdebug
 		if(_SQL_DEBUG=='Y'){
 			if(file_exists ( _SQL_PATH)){
 				$filename = _SQL_PATH.'sql.'.date('Ymd').'.log';
-				$time = date('H:i:s');
-				$data = "[{$time}] ".trim($sql)."; \r\n";
+				$now  = date('H:i:s');
+				$data = "[{$now}] ".trim($sql)."; [{$time}]\r\n";
 				//判断是否可写
 				if( file_exists($filename) && !is_writable($filename) ){//文件存在且不可写
 					file_put_contents($filename.'.tmp',$data,FILE_APPEND);
