@@ -31,8 +31,10 @@ class log
 		$file_path = _ACCESS_LOG_PATH.'codeAnt.'.$date.'.log';
 		$ip = util::getUserIp();
 		$agent = util::getUserBroswer();
-		$datetime = date("Y-m-d H:i:s");
-		$prefix = "[{$datetime}] [{$ip}] [{$agent}] [$level] {$_SERVER['REQUEST_URI']}({$filename}{$line}):";
+		//$datetime = date("Y-m-d H:i:s");
+		$datetime = date("H:i:s");
+        $request_uri = empty($_SERVER['REQUEST_URI'])?$_SERVER['SCRIPT_FILENAME']:$_SERVER['REQUEST_URI'];
+		$prefix = "[{$datetime}] [{$ip}] [{$agent}] [$level] {$request_uri}({$filename}{$line}):";
 		$data = $prefix.$term."\r\n";
 		file_put_contents($file_path, $data, FILE_APPEND);
 		if($display){
