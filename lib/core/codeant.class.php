@@ -26,6 +26,7 @@ class codeant
 
 	public $controller;
 	public $action;
+	public $method;
 
 	public function __construct()
 	{
