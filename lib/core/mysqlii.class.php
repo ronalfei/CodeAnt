@@ -263,21 +263,18 @@ class mysqlii
     {
         $str = "";
         foreach($params as $key=>$value){
-            if(!isset($value)||$value===''){
-                continue;
+            $key = trim($key);
+            if(strtolower(trim($value))=='now()' || $value===Null){
+                $str .= ",`$key`={$value} ";
             }else{
-                $key = trim($key);
-                if(strtolower(trim($value))=='now()'){
-                    $str .= ",`$key`={$value} ";
-                }else{
-                    $str .= ",`$key`='{$value}' ";
-                }
+                $str .= ",`$key`='{$value}' ";
             }
         }
         $str = substr($str,1);
         return ' set '.$str;
 
     }
+
     public function compileSetSql($params)
     {
         return $this->compileSetValue($params);

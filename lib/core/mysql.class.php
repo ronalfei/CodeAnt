@@ -289,14 +289,10 @@ class mysql
     {
         $str = "";
         foreach($params as $key=>$value){
-            if(!isset($value)||$value===''){
-                continue;
+            if(strtolower(trim($value))=='now()' || $value===Null){
+                $str .= ",`$key`={$value} ";
             }else{
-                if(trim($value)=='now()'){
-                    $str .= ",`$key`={$value} ";
-                }else{
-                    $str .= ",`$key`='{$value}' ";
-                }
+                $str .= ",`$key`='{$value}' ";
             }
         }
         $str = substr($str,1);
