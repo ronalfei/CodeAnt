@@ -265,7 +265,7 @@ class mysqlii
         foreach($params as $key=>$value){
             $key = trim($key);
             if(strstr($key,'+')=='+self'){
-                $str[]  = " $key=concat({$key}, {$value}) ";
+                $str  .= " ,`$key`=concat({$key}, {$value}) ";
             }else{
                 if(strtolower(trim($value))=='now()' || $value==='null'){
                     $str .= ",`$key`={$value} ";
