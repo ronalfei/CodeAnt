@@ -264,11 +264,16 @@ class mysqlii
         $str = "";
         foreach($params as $key=>$value){
             $key = trim($key);
-            if(strtolower(trim($value))=='now()' || $value===Null){
-                $str .= ",`$key`={$value} ";
+            if(strstr($key,'+')=='+self'){
+                $str[]  = " $key=concat({$key}, {$value}) ";
             }else{
-                $str .= ",`$key`='{$value}' ";
+                if(strtolower(trim($value))=='now()' || $value==='null'){
+                    $str .= ",`$key`={$value} ";
+                }else{
+                    $str .= ",`$key`='{$value}' ";
+                }
             }
+
         }
         $str = substr($str,1);
         return ' set '.$str;
