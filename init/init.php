@@ -12,7 +12,7 @@ header('Cache-Control:no-Cache');
 
 define('_ROOT', dirname(dirname(__FILE__)).'/');
 
-define('_APP_ENV', 'develop');          //develop/test/product
+define('_APP_ENV', 'develop');          //develop/test/product 三种环境的名字对应config下面的三个文件夹,如需要还可以自行添加.
 
 
 ini_set('magic_quotes_sybase', 'Off');		//由于smarty的问题,因此这里必须得关闭.否则会出问题,新版本已经解决
