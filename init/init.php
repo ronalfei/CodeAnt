@@ -10,7 +10,9 @@
 header('Content-Type:text/html;Charset=utf-8');
 header('Cache-Control:no-Cache');
 
-define('_ROOT',dirname(dirname(__FILE__)).'/');
+define('_ROOT', dirname(dirname(__FILE__)).'/');
+
+define('_APP_ENV', 'develop');          //develop/test/product
 
 
 ini_set('magic_quotes_sybase', 'Off');		//由于smarty的问题,因此这里必须得关闭.否则会出问题,新版本已经解决
@@ -19,13 +21,16 @@ ini_set('cgi.fix_pathinfo', 0);
 date_default_timezone_set('PRC');
 
 //-------load config file here--------------
+//config root 
+define('_CONFIG_ROOT', _ROOT._APP_ENV.'/config/');
+
 //require_once(_ROOT.'config/config.php');
-require_once(_ROOT.'config/core.config.php');
-require_once(_ROOT.'config/app.config.php');
-require_once(_ROOT.'config/db.config.php');
-require_once(_ROOT.'config/memcache.config.php');
-require_once(_ROOT.'config/smarty.config.php');
-require_once(_ROOT.'config/custom.config.php');
+require_once(_CONFIG_ROOT.'core.config.php');
+require_once(_CONFIG_ROOT.'app.config.php');
+require_once(_CONFIG_ROOT.'db.config.php');
+require_once(_CONFIG_ROOT.'memcache.config.php');
+require_once(_CONFIG_ROOT.'smarty.config.php');
+require_once(_CONFIG_ROOT.'custom.config.php');
 //-------------------------------------------
 
 require_once(_SMARTY_ROOT.'Smarty.class.php');
