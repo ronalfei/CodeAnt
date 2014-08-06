@@ -3,20 +3,11 @@
 final class config_router
 {
     public static $map = Array(
-        '/^v1\/user\/register\/mobile\/captcha\/check/i' => array('user', 'check_mobile_captcha'),
-        '/^v1\/user\/register\/mobile\/captcha/i' => array('user', 'reg_captcha'),
-        '/^v1\/user\/register\/email\/captcha/i' => array('user', 'email_reg_captcha'),
-        '/^v1\/user\/email\/activate\/resend/i' => array('user', 'email_active_resend'),
-        '/^v1\/user\/email\/activate\/page\/(\w+)/i' => array('user', 'email_activate_page'),
-        '/^v1\/user\/email\/activate\/(\w+)/i' => array('user', 'email_activate'),
-        '/^v1\/user\/password\/reset\/(\w+)\/form/i' => array('user', 'reset_password_form'),//打开reset密码的页面
-        '/^v1\/user\/password\/reset\/captcha\/check/i' => array('user', 'check_reset_captcha'),
-        '/^v1\/user\/password\/reset\/captcha/i' => array('user', 'reset_captcha'),
-        '/^v1\/user\/password\/reset/i' => array('user', 'reset_password'),
-        '/^v1\/user\/password\/modify/i' => array('user', 'modify_password'),
-        '/^v1\/user\/register\/mobile/i' => array('user', 'mobile_register'),
-        '/^v1\/user\/register\/email/i' => array('user', 'email_register'),
-        '/^v1\/user\/login\/captcha/i' => array('captcha', 'login'),
+        '/^svn\/up/i' => array(
+                            'get' => array('svn', 'up'),
+                            'post' => array('svn', 'up'),
+                        );
+
         '/^v1\/user\/login/i' => array('user', 'login'),
         '/^v1\/user\/logout/i' => array('user', 'logout'),
         '/^v1\/user\/info\/(\w*)/i' => array('user', 'info'),
@@ -27,7 +18,6 @@ final class config_router
         '/^v1\/user\/password\/verify/i' => array('user', 'verify_oldpassword'),
         '/^v1\/user\/delete\/(\d*)/i' => array('user', 'delete'),
 
-        '/^svn\/up/i' => array('svn', 'up'),
         '/^v1\/camera\/categories/i' => array('camera', 'categories'),
         '/^v1\/camera\/public/i' => array('camera', 'public'),
         '/^v1\/camera\/self/i' => array('camera', 'self'),
@@ -56,19 +46,6 @@ final class config_router
         '/^v1\/clip\/zip\/download\/list/i' => array('clip', 'zip_download'),
 		
 		'/^v1\/clips\/list_download/i' => array('clip', 'list_download'),
-//jiangyutao-------------------------------------------------
-        '/^v1\/clip\/judge/i' => array('clip', 'judge'),
-		
-        '/^v1\/clip\/link\/create/i' => array('link', 'create'),
-        '/^v1\/link\/list/i' => array('link', 'list'),
-        '/^v1\/link\/delete/i' => array('link', 'delete'),
-        '/^v1\/link\/view\/(\d+)/i' => array('link', 'view'),
-
-        '/^v1\/shareops\/invite/i' => array('share', 'invite'),
-        '/^v1\/shareops\/kick/i' => array('share', 'kick'),
-        '/^v1\/shareops\/accept/i' => array('share', 'accept'),
-        '/^v1\/shareops\/decline/i' => array('share', 'decline'),
-        '/^v1\/shareops\/quit/i' => array('share', 'quit'),
 
         '/^v1\/event\/id/i' => array('event', 'id'),
         '/^v1\/event\/record/i' => array('event', 'record'),
@@ -81,28 +58,6 @@ final class config_router
         '/^v1\/token\/check/i' => array('token', 'check'),
         '/^v1\/token\/get/i' => array('token', 'get'),
         '/^v1\/auth/i' => array('token', 'check'),
-
-//==============================operation===================================
-//-------------------------operator-----------------------
-
-        '/^v1\/operator\/menu/i' => array('operator', 'menu'),
-        '/^v1\/operator\/login/i' => array('operator', 'login'),
-        '/^v1\/operator\/logout/i' => array('operator', 'logout'),
-        '/^v1\/operator\/index/i' => array('operator', 'main'),
-        '/^v1\/operator\/list/i' => array('operator', 'list'),
-        '/^v1\/operator\/add/i' => array('operator', 'add'),
-        '/^v1\/operator\/update/i' => array('operator', 'update'),
-        '/^v1\/operator\/delete\/([,\d]+)/i' => array('operator', 'delete'),
-        '/^v1\/operator\/info\/(\d+)/i' => array('operator', 'info'),
-
-//-------------------------role---------------------------
-
-        '/^v1\/role\/list/i' => array('role', 'list'),
-        '/^v1\/role\/add/i' => array('role', 'add'),
-        '/^v1\/role\/update/i' => array('role', 'update'),
-        '/^v1\/role\/delete\/([,\d]+)/i' => array('role', 'delete'),
-        '/^v1\/role\/info\/(\d+)/i' => array('role', 'info'),
-        '/^v1\/role\/privilege\/list/i' => array('privilege', 'list'),
 
 //-------------------------service(epack)---------------------------
 
@@ -174,43 +129,12 @@ final class config_router
         '/^v1\/ops\/device\/export/i' => array('device', 'export'),
 
 
-//------------------------------upgrade---------------------------------------
-        '/^v1\/camera\/package\/manifest/i' => array('upgrade', 'camera_info'),
-        '/^v1\/mobile\/ios\/manifest/i' => array('upgrade', 'ios_info'),
-        '/^v1\/mobile\/android\/manifest/i' => array('upgrade', 'android_info'),
-
-//------------------------------suggest---------------------------------------
-        '/^v1\/suggest\/submit/i' => array('suggest', 'submit'),
-        '/^v1\/suggest\/list/i' => array('suggest', 'list'),
-
 //------------------------------test---------------------------------------
 
         '/^v1\/test\/x\/(\w+)\/y\/(\w+)/i' => array('example', 'test'),
         '/^v1\/test\/x\/y\/(\w+)/i' => array('example', 'test'),
         '/^v1\/test\/x\/y/i' => array('example', 'test'),
 
-//-----------------------------order---------------------------------------
-        '/^v1\/order\/list/i' => array('order', 'list'),
-        '/^v1\/order\/query\/crontab/i' => array('order', 'crontab_query'),
-        '/^v1\/order\/create/i' => array('order', 'create'),
-        '/^v1\/order\/check/i' => array('order', 'check'),
-//-----------------------------mobile order---------------------------------------
-		'/^v1\/order\/select/i' => array('order', 'select'),
-		'/^v1\/order\/confirm/i' => array('order', 'confirm'),
-//------------------------------statistic_jyt------------------------------
-		'/^v1\/statistic\/activate_num/i'=>array('statistic','activate_num'),
-		'/^v1\/statistic\/bind_camera_user_num/i'=>array('statistic','bind_camera_user_num'),
-		'/^v1\/statistic\/day_activate/i'=>array('statistic','day_activate'),
-		'/^v1\/statistic\/statistic_camera_online/i'=>array('statistic','statistic_camera_online'),
-		'/^v1\/statistic\/online_peak/i'=>array('statistic','online_peak'),
-//-------------------------------智能眼镜 jyt------------------
-		'/^v1\/camera\/register/i'=>array('device','register'),
-		'/^v1\/device\/init/i'=>array('device','init'),
-//-------------------------------------
-		'/^v1\/admin\/reg_captcha/i'=>array('user','reg_official_captcha'),
-		'/^v1\/admin\/reset_password_captcha/i'=>array('user','reset_official_captcha'),
-//------------------------------domain config------------------------------
-		'/^v1\/domain\/config/i'=>array('domain','config'),
     );
 }
 

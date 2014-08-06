@@ -26,6 +26,8 @@ class codeant
     public $debug		= "";
     public $log			= "";
 
+    public $requestMethod;
+
     public $controller;
     public $action;
     public $method;
@@ -87,7 +89,7 @@ class codeant
 
     private function setRequestMethod()
     {
-        $this->requestMethod = empty($_SERVER['REQUEST_METHOD'])?'unkown':$_SERVER['REQUEST_METHOD'];
+        $this->requestMethod = empty($_SERVER['REQUEST_METHOD'])?'unkown':strtolower($_SERVER['REQUEST_METHOD']);
     }
 
 
@@ -119,15 +121,19 @@ class codeant
             )
         );
         $uri = $this->dispatch($uri);   //带进去原始数组, 返回一个新的数组
-        if(empty($uri[0])){//没有获取到控制器名称,则加载默认控制器
-            $controller	= _DEFAULT_CONTROLLER;
-            $action		= _DEFAULT_METHOD;
-            $params		= Array();
-        }else{
-            $controller = $uri[0];
-            $action = empty($uri[1])?_DEFAULT_METHOD:$uri[1];
-            $params = array_slice($uri, 2);
+        if(empty($uri)){
+            http_response_code(404);
+            die("uri not found"); 
         }
+        if(empty($uri[$this->requestMethod]){
+            http_response_code(405);
+            die("method not allowed"); 
+        }else{
+            $controller = $uri[$this->requestMethod][0];
+            $action = empty($uri[$this->requestMethod][1])?_DEFAULT_METHOD:$uri[$this->requestMethod][1];
+            $params = array_slice($uri[$this->requestMethod], 2);
+        }
+
 
         $controller_file_path  = _CONTROLLER_ROOT."{$controller}.controller.php";
         if(file_exists($controller_file_path)){
