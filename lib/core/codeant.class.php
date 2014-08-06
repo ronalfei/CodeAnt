@@ -125,7 +125,7 @@ class codeant
             http_response_code(404);
             die("uri not found"); 
         }
-        if(empty($uri[$this->requestMethod]){
+        if(empty($uri[$this->requestMethod])){
             http_response_code(405);
             die("method not allowed"); 
         }else{

@@ -22,7 +22,7 @@ date_default_timezone_set('PRC');
 
 //-------load config file here--------------
 //config root 
-define('_CONFIG_ROOT', _ROOT._APP_ENV.'/config/');
+define('_CONFIG_ROOT', _ROOT.'config/'._APP_ENV.'/');
 
 //require_once(_ROOT.'config/config.php');
 require_once(_CONFIG_ROOT.'core.config.php');
