@@ -2,20 +2,11 @@
 /**
  * CodeAnt
  * @author	blackAnimal
- * @version	0.0.1
- * @abstract 为了支持5.2,必须实例化该类后,才能调用各个对象
+ * @version	0.2.1
+ * @abstract 
  */
 class codeant
 {
-    /************ 不支持这种方式初始化,暂时保留***********************
-    static public $benchmark= factory::createBenchmarkObject;
-    static public $db		= factory::createDbObject;
-    static public $tpl		= factory::createTplObject(factory::$benchmark);
-    static public $input	= factory::createInputObject;
-    static public $cache	= factory::createCacheObject;
-    static public $debug	= factory::createDebugObject(factory::$benchmark);
-    *******************************************************************/
-
     public $response    = '';
 
     public $benchmark	= "";
@@ -152,7 +143,6 @@ class codeant
             $this->setController($controller);
             $this->setMethod($action);
             $this->log->info($this->requestMethod);
-//$this->log->debug(empty($_SERVER['HTTP_USER_AGENT'])?"\nempty\n":"\n\n{$_SERVER['HTTP_USER_AGENT']}\n");
             call_user_func_array(array($object,$_action), $params);
         }else{
             throw new cexception ("该控制器:{$controller}的方法:{$action}不存在");
