@@ -6,7 +6,7 @@ final class config_router
         '/^svn\/up/i' => array(
                             'get' => array('svn', 'up'),
                             'post' => array('svn', 'up'),
-                        );
+                        ),
 
         '/^v1\/user\/login/i' => array('user', 'login'),
         '/^v1\/user\/logout/i' => array('user', 'logout'),

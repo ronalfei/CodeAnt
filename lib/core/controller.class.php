@@ -25,7 +25,7 @@ class controller
 	public function __get($var_name)
 	{
 	    global $codeAnt;
-        $var_name = strtolower($var_name)
+        $var_name = strtolower($var_name);
         switch($var_name){
             case 'codeant':
 			    $autoGet = &$codeAnt;
