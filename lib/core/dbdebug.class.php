@@ -24,6 +24,9 @@ class dbdebug
 					file_put_contents($filename.'.tmp',$data,FILE_APPEND);
 				}else{//文件不存在或者可写
 					file_put_contents($filename,$data,FILE_APPEND);
+                    if(php_sapi_name()=='cli'){
+                        chmod($filename, 0777);
+                    }
 				}
 			}else{
 				echo 'sql日志路径不存在:'._SQL_PATH;
