@@ -153,7 +153,7 @@ class codeant
 
     public function response($code, $status, $data)
     {
-        json_response($code, $status, $data);
+        $this->json_response($code, $status, $data);
     }
 
     public function json_response($http_code, $status, $data)
