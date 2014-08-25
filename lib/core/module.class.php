@@ -36,6 +36,15 @@ class module
 	{
 		//nothing todo;
 	}
+
+
+    public static function response($status, $data=array(), $msg='')
+    {
+        $rt['status'] = $status;
+        $rt['data'] = $data;
+        $rt['msg'] = $msg;
+        return $rt;
+    }
 }
 
 
