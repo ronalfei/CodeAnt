@@ -101,6 +101,7 @@ class codeant
     }
     public function run()
     {
+        header("X-FrameWork-By: CodeAnt");
         $request_uri = $_SERVER['REQUEST_URI'];
         $this->setRequestMethod();
         $tmp_uri = explode('?', $request_uri);
