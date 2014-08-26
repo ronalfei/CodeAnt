@@ -69,19 +69,28 @@ class mysqlii
 		$this->db_name  = $basename;
 	}
 
-	public function loadDb($host,$port,$user,$password,$db_name,$charset)
-	{
-		if($this->link){
-			$this->close();
-			$this->link=false;
-		}
-		$this -> host		= $host;
-		$this -> port		= $port;
-		$this -> user		= $user;
-		$this -> db_name	= $db_name;
-		$this -> charset	= $charset;
-		$this -> password	= $password;
-	}
+    public function changeDB($host,$port,$user,$password,$db_name,$charset)
+    {
+        if($this->link){
+            $this->close();
+            $this->link=false;
+        }
+        $this -> host       = $host;
+        $this -> port       = $port;
+        $this -> user       = $user;
+        $this -> db_name    = $db_name;
+        $this -> charset    = $charset;
+        $this -> password   = $password;
+    }
+
+
+    public function loadDB($host,$port,$user,$password,$db_name,$charset)
+    {
+        $another_db = new self($host,$port,$user,$password,$db_name,$charset,"");
+        return $another_db;
+    }
+
+
 
 	/**
 	 * SQL语句执行函数
