@@ -1,7 +1,7 @@
 <?php
 
 //DB_TYPE类型有mysql和mysqlii和pdodb
-define('_DB_TYPE','mongodb');							//配置数据库类型
+define('_DB_TYPE','mysqlii');							//配置数据库类型
 define('_DB_HOST','127.0.0.1');							//配置数据库主机名
 define('_DB_PORT','27017');								//配置数据库主机名
 define('_DB_USER','ronalfei');							//配置数据库连接用户名

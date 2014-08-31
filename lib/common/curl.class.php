@@ -12,7 +12,7 @@ class curl
 	static function post($url, $data, $options=array())
 	{
 		$ch = curl_init();
-		$post_data = http_build_query($data);
+		$posts = http_build_query($data);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $posts);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
