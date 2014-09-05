@@ -72,9 +72,11 @@ class util
 	public static function createUuId()
 	{
 		
-		$time = microtime();
-		$tmp = explode(" ", $time);
-		$milTime = $tmp[1].$tmp[0]*1000000;
+		$time   = microtime();
+		$tmp    = explode(" ", $time);
+        $t      = explode('.', $tmp[0]);
+        $mt     = substr($t[1], 0,6);
+		$milTime = $tmp[1].$mt;
 		$rand = self::rand2();
 		return $milTime.$rand;
 	}
