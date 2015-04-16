@@ -7,14 +7,95 @@ final class config_router
                             'get' => array('svn', 'up'),
                             'post' => array('svn', 'up'),
                         ),
+        '/\/$/i' => array(
+                            'get' => array('index', 'index'),
+                        ),
+        '/^info$/i' => array(
+                            'get' => array('svn', 'info'),
+                        ),
+        '/^god\/login$/i' => array(
+                            'get' => array('god', 'login'),
+                        ),
 
-        '/^v1\/user\/login/i' => array('user', 'login'),
-        '/^v1\/user\/logout/i' => array('user', 'logout'),
-        '/^v1\/user\/info\/(\w*)/i' => array('user', 'info'),
-        '/^v1\/user\/detail\/(\w*)/i' => array('user', 'detail'),
-        '/^v1\/user\/list/i' => array('user', 'list'),
-        '/^v1\/user\/self/i' => array('user', 'self'),
-		
+
+//------------------------about user-----------------------
+        '/^users$/i' => array(
+                            'get' => array('user', 'list'),
+                        ),
+        '/^user\/(\d+)/i' => array(
+                            'get' => array('user', 'info'),
+                        ),
+        '/^user\/create$/i' => array(
+                            'post' => array('user', 'create'),
+                        ),
+        '/^user\/delete\/(\d+)$/i' => array(
+                            'get' => array('user', 'delete'),
+                        ),
+
+        '/^user\/modify$/i' => array(
+                            'post' => array('user', 'modify'),
+                        ),
+
+        '/^user\/login$/i' => array(
+                            'post' => array('user', 'login'),
+                        ),
+
+        '/^user\/logout$/i' => array(
+                            'get' => array('user', 'logout'),
+                        ),
+//------------------------user end-------------------------
+
+//-------------------about application---------------------
+        '/^applications$/i' => array(
+                            'get' => array('application', 'list'),
+                        ),
+        '/^application\/(\d+)$/i' => array(
+                            'get' => array('application', 'info'),
+                        ),
+        '/^application\/create$/i' => array(
+                            'post' => array('application', 'create'),
+                        ),
+//        '/^application\/delete\/(\d+)$/i' => array(
+//                            'get' => array('application', 'delete'),
+//                        ),
+
+        '/^application\/modify$/i' => array(
+                            'post' => array('application', 'modify'),
+                        ),
+        '/^application\/(\d+)\/downloadlua$/i' => array(
+                            'get' => array('application', 'download_lua'),
+                        ),
+//------------------application end-------------------------
+
+//-------------------about items---------------------
+        '/^application\/(\d+)\/items$/i' => array(
+                            'get' => array('item', 'list'),
+                        ),
+        '/^item\/(\d+)/i' => array(
+                            'get' => array('item', 'info'),
+                        ),
+        '/^item\/create$/i' => array(
+                            'post' => array('item', 'create'),
+                        ),
+        '/^item\/receive$/i' => array(
+                            'post' => array('item', 'receive'),
+                        ),
+        '/^item\/egress\/chart$/i' => array(
+                            'get' => array('chart', 'egress'),
+                        ),
+        '/^item\/path\/chart$/i' => array(
+                            'get' => array('chart', 'path'),
+                        ),
+        '/^item\/hits\/chart$/i' => array(
+                            'get' => array('chart', 'hits'),
+                        ),
+        '/^item\/bandwidth\/chart$/i' => array(
+                            'get' => array('chart', 'bandwidth'),
+                        ),
+//------------------items end-------------------------
+
+
+	
         '/^v1\/user\/password\/verify/i' => array('user', 'verify_oldpassword'),
         '/^v1\/user\/delete\/(\d*)/i' => array('user', 'delete'),
 

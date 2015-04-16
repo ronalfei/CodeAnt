@@ -12,7 +12,10 @@ header('Cache-Control:no-Cache');
 
 define('_ROOT', dirname(dirname(__FILE__)).'/');
 
-define('_APP_ENV', 'develop');          //develop/test/product 三种环境的名字对应config下面的三个文件夹,如需要还可以自行添加.
+if(empty($_SERVER['RUNTIME'])){
+    die('please config runtime in php-fpm.conf');
+}
+define('_APP_ENV', $_SERVER['RUNTIME']);          //develop/test/product 三种环境的名字对应config下面的三个文件夹,如需要还可以自行添加.
 
 
 ini_set('magic_quotes_sybase', 'Off');		//由于smarty的问题,因此这里必须得关闭.否则会出问题,新版本已经解决
@@ -31,7 +34,14 @@ require_once(_CONFIG_ROOT.'db.config.php');
 require_once(_CONFIG_ROOT.'memcache.config.php');
 require_once(_CONFIG_ROOT.'smarty.config.php');
 require_once(_CONFIG_ROOT.'custom.config.php');
+require_once(_ROOT.'config/router.config.php');
 //-------------------------------------------
+
+
+ini_set('session.name', _SESSION_NAME);
+//ini_set('session.gc_maxlifetime', _SESSION_LIFETIME);
+ini_set('session.save_path', _SESSION_PATH);
+ini_set('session.save_handler', _SESSION_HANDLER);
 
 require_once(_SMARTY_ROOT.'Smarty.class.php');
 require_once(_CORE_ROOT.'codeant.class.php');
